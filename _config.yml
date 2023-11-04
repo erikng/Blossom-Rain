@@ -1,0 +1,8 @@
+remote_theme: just-the-docs/just-the-docs
+logo: "/assets/AppIcon.png"
+search_enabled: false
+aux_links:
+  "Submit an issue with Blossom Rain":
+    - "//github.com/erikng/Blossom-Rain/issues"
+aux_links_new_tab: true
+color_scheme: dark
