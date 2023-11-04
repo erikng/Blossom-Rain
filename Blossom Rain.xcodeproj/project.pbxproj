@@ -1,0 +1,626 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03E4EB092AF6ED130097B8FA /* Blossom_RainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4EB082AF6ED130097B8FA /* Blossom_RainApp.swift */; };
+		03E4EB0B2AF6ED130097B8FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4EB0A2AF6ED130097B8FA /* ContentView.swift */; };
+		03E4EB0D2AF6ED150097B8FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03E4EB0C2AF6ED150097B8FA /* Assets.xcassets */; };
+		03E4EB112AF6ED150097B8FA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03E4EB102AF6ED150097B8FA /* Preview Assets.xcassets */; };
+		03E4EB1B2AF6ED150097B8FA /* Blossom_RainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4EB1A2AF6ED150097B8FA /* Blossom_RainTests.swift */; };
+		03E4EB252AF6ED150097B8FA /* Blossom_RainUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4EB242AF6ED150097B8FA /* Blossom_RainUITests.swift */; };
+		03E4EB272AF6ED150097B8FA /* Blossom_RainUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4EB262AF6ED150097B8FA /* Blossom_RainUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		03E4EB172AF6ED150097B8FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03E4EAFD2AF6ED130097B8FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 03E4EB042AF6ED130097B8FA;
+			remoteInfo = "Blossom Rain";
+		};
+		03E4EB212AF6ED150097B8FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03E4EAFD2AF6ED130097B8FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 03E4EB042AF6ED130097B8FA;
+			remoteInfo = "Blossom Rain";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		03E4EB052AF6ED130097B8FA /* Blossom Rain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blossom Rain.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		03E4EB082AF6ED130097B8FA /* Blossom_RainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blossom_RainApp.swift; sourceTree = "<group>"; };
+		03E4EB0A2AF6ED130097B8FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		03E4EB0C2AF6ED150097B8FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		03E4EB0E2AF6ED150097B8FA /* Blossom_Rain.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Blossom_Rain.entitlements; sourceTree = "<group>"; };
+		03E4EB102AF6ED150097B8FA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		03E4EB162AF6ED150097B8FA /* Blossom RainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Blossom RainTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		03E4EB1A2AF6ED150097B8FA /* Blossom_RainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blossom_RainTests.swift; sourceTree = "<group>"; };
+		03E4EB202AF6ED150097B8FA /* Blossom RainUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Blossom RainUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		03E4EB242AF6ED150097B8FA /* Blossom_RainUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blossom_RainUITests.swift; sourceTree = "<group>"; };
+		03E4EB262AF6ED150097B8FA /* Blossom_RainUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blossom_RainUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		03E4EB022AF6ED130097B8FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03E4EB132AF6ED150097B8FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03E4EB1D2AF6ED150097B8FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		03E4EAFC2AF6ED130097B8FA = {
+			isa = PBXGroup;
+			children = (
+				03E4EB072AF6ED130097B8FA /* Blossom Rain */,
+				03E4EB192AF6ED150097B8FA /* Blossom RainTests */,
+				03E4EB232AF6ED150097B8FA /* Blossom RainUITests */,
+				03E4EB062AF6ED130097B8FA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		03E4EB062AF6ED130097B8FA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				03E4EB052AF6ED130097B8FA /* Blossom Rain.app */,
+				03E4EB162AF6ED150097B8FA /* Blossom RainTests.xctest */,
+				03E4EB202AF6ED150097B8FA /* Blossom RainUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		03E4EB072AF6ED130097B8FA /* Blossom Rain */ = {
+			isa = PBXGroup;
+			children = (
+				03E4EB082AF6ED130097B8FA /* Blossom_RainApp.swift */,
+				03E4EB0A2AF6ED130097B8FA /* ContentView.swift */,
+				03E4EB0C2AF6ED150097B8FA /* Assets.xcassets */,
+				03E4EB0E2AF6ED150097B8FA /* Blossom_Rain.entitlements */,
+				03E4EB0F2AF6ED150097B8FA /* Preview Content */,
+			);
+			path = "Blossom Rain";
+			sourceTree = "<group>";
+		};
+		03E4EB0F2AF6ED150097B8FA /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				03E4EB102AF6ED150097B8FA /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		03E4EB192AF6ED150097B8FA /* Blossom RainTests */ = {
+			isa = PBXGroup;
+			children = (
+				03E4EB1A2AF6ED150097B8FA /* Blossom_RainTests.swift */,
+			);
+			path = "Blossom RainTests";
+			sourceTree = "<group>";
+		};
+		03E4EB232AF6ED150097B8FA /* Blossom RainUITests */ = {
+			isa = PBXGroup;
+			children = (
+				03E4EB242AF6ED150097B8FA /* Blossom_RainUITests.swift */,
+				03E4EB262AF6ED150097B8FA /* Blossom_RainUITestsLaunchTests.swift */,
+			);
+			path = "Blossom RainUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		03E4EB042AF6ED130097B8FA /* Blossom Rain */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03E4EB2A2AF6ED150097B8FA /* Build configuration list for PBXNativeTarget "Blossom Rain" */;
+			buildPhases = (
+				03E4EB012AF6ED130097B8FA /* Sources */,
+				03E4EB022AF6ED130097B8FA /* Frameworks */,
+				03E4EB032AF6ED130097B8FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Blossom Rain";
+			productName = "Blossom Rain";
+			productReference = 03E4EB052AF6ED130097B8FA /* Blossom Rain.app */;
+			productType = "com.apple.product-type.application";
+		};
+		03E4EB152AF6ED150097B8FA /* Blossom RainTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03E4EB2D2AF6ED150097B8FA /* Build configuration list for PBXNativeTarget "Blossom RainTests" */;
+			buildPhases = (
+				03E4EB122AF6ED150097B8FA /* Sources */,
+				03E4EB132AF6ED150097B8FA /* Frameworks */,
+				03E4EB142AF6ED150097B8FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				03E4EB182AF6ED150097B8FA /* PBXTargetDependency */,
+			);
+			name = "Blossom RainTests";
+			productName = "Blossom RainTests";
+			productReference = 03E4EB162AF6ED150097B8FA /* Blossom RainTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		03E4EB1F2AF6ED150097B8FA /* Blossom RainUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03E4EB302AF6ED150097B8FA /* Build configuration list for PBXNativeTarget "Blossom RainUITests" */;
+			buildPhases = (
+				03E4EB1C2AF6ED150097B8FA /* Sources */,
+				03E4EB1D2AF6ED150097B8FA /* Frameworks */,
+				03E4EB1E2AF6ED150097B8FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				03E4EB222AF6ED150097B8FA /* PBXTargetDependency */,
+			);
+			name = "Blossom RainUITests";
+			productName = "Blossom RainUITests";
+			productReference = 03E4EB202AF6ED150097B8FA /* Blossom RainUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		03E4EAFD2AF6ED130097B8FA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					03E4EB042AF6ED130097B8FA = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+					03E4EB152AF6ED150097B8FA = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = 03E4EB042AF6ED130097B8FA;
+					};
+					03E4EB1F2AF6ED150097B8FA = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = 03E4EB042AF6ED130097B8FA;
+					};
+				};
+			};
+			buildConfigurationList = 03E4EB002AF6ED130097B8FA /* Build configuration list for PBXProject "Blossom Rain" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 03E4EAFC2AF6ED130097B8FA;
+			productRefGroup = 03E4EB062AF6ED130097B8FA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				03E4EB042AF6ED130097B8FA /* Blossom Rain */,
+				03E4EB152AF6ED150097B8FA /* Blossom RainTests */,
+				03E4EB1F2AF6ED150097B8FA /* Blossom RainUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		03E4EB032AF6ED130097B8FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03E4EB112AF6ED150097B8FA /* Preview Assets.xcassets in Resources */,
+				03E4EB0D2AF6ED150097B8FA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03E4EB142AF6ED150097B8FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03E4EB1E2AF6ED150097B8FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		03E4EB012AF6ED130097B8FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03E4EB0B2AF6ED130097B8FA /* ContentView.swift in Sources */,
+				03E4EB092AF6ED130097B8FA /* Blossom_RainApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03E4EB122AF6ED150097B8FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03E4EB1B2AF6ED150097B8FA /* Blossom_RainTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03E4EB1C2AF6ED150097B8FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03E4EB272AF6ED150097B8FA /* Blossom_RainUITestsLaunchTests.swift in Sources */,
+				03E4EB252AF6ED150097B8FA /* Blossom_RainUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		03E4EB182AF6ED150097B8FA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 03E4EB042AF6ED130097B8FA /* Blossom Rain */;
+			targetProxy = 03E4EB172AF6ED150097B8FA /* PBXContainerItemProxy */;
+		};
+		03E4EB222AF6ED150097B8FA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 03E4EB042AF6ED130097B8FA /* Blossom Rain */;
+			targetProxy = 03E4EB212AF6ED150097B8FA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		03E4EB282AF6ED150097B8FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		03E4EB292AF6ED150097B8FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		03E4EB2B2AF6ED150097B8FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Blossom Rain/Blossom_Rain.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Blossom Rain/Preview Content\"";
+				DEVELOPMENT_TEAM = U7DN82F4L9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Blossom Rain";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Skye-Design.Blossom-Rain";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		03E4EB2C2AF6ED150097B8FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Blossom Rain/Blossom_Rain.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Blossom Rain/Preview Content\"";
+				DEVELOPMENT_TEAM = U7DN82F4L9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Blossom Rain";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Skye-Design.Blossom-Rain";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		03E4EB2E2AF6ED150097B8FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U7DN82F4L9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Skye-Design.Blossom-RainTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Blossom Rain.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Blossom Rain";
+			};
+			name = Debug;
+		};
+		03E4EB2F2AF6ED150097B8FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U7DN82F4L9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Skye-Design.Blossom-RainTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Blossom Rain.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Blossom Rain";
+			};
+			name = Release;
+		};
+		03E4EB312AF6ED150097B8FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U7DN82F4L9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Skye-Design.Blossom-RainUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Blossom Rain";
+			};
+			name = Debug;
+		};
+		03E4EB322AF6ED150097B8FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U7DN82F4L9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Skye-Design.Blossom-RainUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Blossom Rain";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		03E4EB002AF6ED130097B8FA /* Build configuration list for PBXProject "Blossom Rain" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03E4EB282AF6ED150097B8FA /* Debug */,
+				03E4EB292AF6ED150097B8FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03E4EB2A2AF6ED150097B8FA /* Build configuration list for PBXNativeTarget "Blossom Rain" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03E4EB2B2AF6ED150097B8FA /* Debug */,
+				03E4EB2C2AF6ED150097B8FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03E4EB2D2AF6ED150097B8FA /* Build configuration list for PBXNativeTarget "Blossom RainTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03E4EB2E2AF6ED150097B8FA /* Debug */,
+				03E4EB2F2AF6ED150097B8FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03E4EB302AF6ED150097B8FA /* Build configuration list for PBXNativeTarget "Blossom RainUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03E4EB312AF6ED150097B8FA /* Debug */,
+				03E4EB322AF6ED150097B8FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 03E4EAFD2AF6ED130097B8FA /* Project object */;
+}
