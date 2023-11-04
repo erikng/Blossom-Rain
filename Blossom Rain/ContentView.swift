@@ -103,13 +103,16 @@ struct ContentView: View {
                         Text("Calcium")
                         Spacer()
                         if unit == .milliliter {
-                            Text(String(Int(round((calciumMultiplier*(0.55*calciumDropCount)*(mlVolume/4500))))))
+                            let calciumMlCalculation = (0.55*calciumDropCount)*(mlVolume/4500)/calciumMultiplier
+                            Text(String(Int(round(calciumMlCalculation))))
                                 .bold()
                         } else if unit == .liter {
-                            Text(String(Int(round((calciumMultiplier*(0.55*calciumDropCount)*(lVolume/4.5))))))
+                            let calciumLCalculation = (0.55*calciumDropCount)*(lVolume/4.5)/calciumMultiplier
+                            Text(String(Int(round(calciumLCalculation))))
                                 .bold()
                         } else if unit == .gallon {
-                            Text(String(Int(round((calciumMultiplier*(0.55*calciumDropCount)*(gVolume/(4500/3785)))))))
+                            let calciumGCalculation = (0.55*calciumDropCount)*(gVolume/4500/3785)/calciumMultiplier
+                            Text(String(Int(round(calciumGCalculation))))
                                 .bold()
                         }
                     }
@@ -119,13 +122,16 @@ struct ContentView: View {
                         Text("Magnesium")
                         Spacer()
                         if unit == .milliliter {
-                            Text(String(Int(round((magnesiumMultiplier*(0.54*magnesiumDropCount)*(mlVolume/4500))))))
+                            let magnesiumMlCalculcation = (0.54*magnesiumDropCount)*(mlVolume/4500)/magnesiumMultiplier
+                            Text(String(Int(round(magnesiumMlCalculcation))))
                                 .bold()
                         } else if unit == .liter {
-                            Text(String(Int(round((magnesiumMultiplier*(0.54*magnesiumDropCount)*(lVolume/4.5))))))
+                            let magnesiumLCalculcation = (0.54*magnesiumDropCount)*(lVolume/4.5)/magnesiumMultiplier
+                            Text(String(Int(round(magnesiumLCalculcation))))
                                 .bold()
                         } else if unit == .gallon {
-                            Text(String(Int(round((magnesiumMultiplier*(0.54*magnesiumDropCount)*(gVolume/(4500/3785)))))))
+                            let magnesiumGCalculcation = (0.54*magnesiumDropCount)*(gVolume/4500/3785)/magnesiumMultiplier
+                            Text(String(Int(round(magnesiumGCalculcation))))
                                 .bold()
                         }
                     }
@@ -136,15 +142,15 @@ struct ContentView: View {
                         Spacer()
                         // Compiler couldn't handle this many computations at once so splitting it into variables
                         if unit == .milliliter {
-                            let potassiumMlCalculcation = potassiumMultiplier*(2*0.56*potassiumDropCount)*(mlVolume/4500)
+                            let potassiumMlCalculcation = (2*0.56*potassiumDropCount)*(mlVolume/4500)/potassiumMultiplier
                             Text(String(Int(round(potassiumMlCalculcation))))
                                 .bold()
                         } else if unit == .liter {
-                            let potassiumLCalculcation = potassiumMultiplier*(2*0.56*potassiumDropCount)*(lVolume/4.5)
+                            let potassiumLCalculcation = (2*0.56*potassiumDropCount)*(lVolume/4.5)/potassiumMultiplier
                             Text(String(Int(round(potassiumLCalculcation))))
                                 .bold()
                         } else if unit == .gallon {
-                            let potassiumGCalculcation = potassiumMultiplier*(2*0.56*potassiumDropCount)*(gVolume/(4500/3785))
+                            let potassiumGCalculcation = (2*0.56*potassiumDropCount)*(gVolume/(4500/3785))/potassiumMultiplier
                             Text(String(Int(round(potassiumGCalculcation))))
                                 .bold()
                         }
@@ -156,15 +162,15 @@ struct ContentView: View {
                         Spacer()
                         // Compiler couldn't handle this many computations at once so splitting it into variables
                         if unit == .milliliter {
-                            let sodiumMlCalculcation = potassiumMultiplier*(2*0.58*sodiumDropCount)*(mlVolume/4500)
+                            let sodiumMlCalculcation = (2*0.58*sodiumDropCount)*(mlVolume/4500)/sodiumMultiplier
                             Text(String(Int(round(sodiumMlCalculcation))))
                                 .bold()
                         } else if unit == .liter {
-                            let sodiumLCalculcation = potassiumMultiplier*(2*0.58*sodiumDropCount)*(lVolume/4.5)
+                            let sodiumLCalculcation = (2*0.58*sodiumDropCount)*(lVolume/4.5)/sodiumMultiplier
                             Text(String(Int(round(sodiumLCalculcation))))
                                 .bold()
                         } else if unit == .gallon {
-                            let sodiumGCalculcation = potassiumMultiplier*(2*0.58*sodiumDropCount)*(gVolume/(4500/3785))
+                            let sodiumGCalculcation = (2*0.58*sodiumDropCount)*(gVolume/(4500/3785))/sodiumMultiplier
                             Text(String(Int(round(sodiumGCalculcation))))
                                 .bold()
                         }
@@ -229,22 +235,22 @@ struct ContentView: View {
         if roundTippedDropperCalcium == true {
             calciumMultiplier = 1.0
         } else {
-            calciumMultiplier = 2.0
+            calciumMultiplier = 0.56
         }
         if roundTippedDropperMagnesium == true {
             magnesiumMultiplier = 1.0
         } else {
-            magnesiumMultiplier = 2.0
+            magnesiumMultiplier = 0.56
         }
         if roundTippedDropperPotassium == true {
             potassiumMultiplier = 1.0
         } else {
-            potassiumMultiplier = 2.0
+            potassiumMultiplier = 0.56
         }
         if roundTippedDropperSodium == true {
             sodiumMultiplier = 1.0
         } else {
-            sodiumMultiplier = 2.0
+            sodiumMultiplier = 0.56
         }
     }
 }
