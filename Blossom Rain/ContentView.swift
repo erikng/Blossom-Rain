@@ -89,20 +89,35 @@ struct ContentView: View {
                     if useManualVolumeInput {
                         if unit == .milliliter {
                             HStack {
+                                #if os(macOS)
+                                TextField("Enter your desired volume in milliliters", value: $mlVolume, formatter: numberZeroStringFormatter)
+                                #endif
+                                #if os(iOS)
                                 TextField("Enter your desired volume in milliliters", value: $mlVolume, formatter: numberZeroStringFormatter)
                                     .keyboardType(.numbersAndPunctuation)
+                                #endif
                             }
                         }
                         if unit == .liter {
                             HStack {
+                                #if os(macOS)
+                                TextField("Enter your desired volume in liters", value: $lVolume, formatter: numberZeroStringFormatter)
+                                #endif
+                                #if os(iOS)
                                 TextField("Enter your desired volume in liters", value: $lVolume, formatter: numberZeroStringFormatter)
                                     .keyboardType(.numbersAndPunctuation)
+                                #endif
                             }
                         }
                         if unit == .gallon {
                             HStack {
+                                #if os(macOS)
+                                TextField("Enter your desired volume in gallons", value: $gVolume, formatter: numberZeroStringFormatter)
+                                #endif
+                                #if os(iOS)
                                 TextField("Enter your desired volume in gallons", value: $gVolume, formatter: numberZeroStringFormatter)
                                     .keyboardType(.numbersAndPunctuation)
+                                #endif
                             }
                         }
                     } else {
