@@ -27,6 +27,8 @@ struct ContentView: View {
     @State private var potassiumDropCount = 0.0
     @State private var sodiumDropCount = 0.0
     @State private var useManualVolumeInput = defaults.bool(forKey: "useManualVolumeInput")
+    @State private var volumeInputStepper = defaults.double(forKey: "volumeInputStepper")
+    let volumeInputSteppers = [1.0, 5.0, 10.0, 20.0, 25.0]
     private let numberZeroStringFormatter: NumberFormatter = {
           let formatter = NumberFormatter()
           formatter.numberStyle = .none
@@ -146,7 +148,11 @@ struct ContentView: View {
                     } else {
                         if unit == .milliliter {
                             HStack {
-                                Slider(value: $mlVolume, in: 0...1000, step: 5)
+                                if volumeInputStepper > 0.0 {
+                                    Slider(value: $mlVolume, in: 0...1000, step: volumeInputStepper)
+                                } else {
+                                    Slider(value: $mlVolume, in: 0...1000, step: 5)
+                                }
                                 Text(String(Int(mlVolume)))
                             }
                         }
@@ -281,6 +287,24 @@ struct ContentView: View {
                         lVolume = 0.0
                         gVolume = 0.0
                     }
+                    
+                    if !useManualVolumeInput {
+                        VStack(alignment: .leading) {
+                            Text("Volume Input Steps (mL)")
+                            Text("The amount of steps the **milliliter** slider will increase or decrease by.")
+                                .font(.footnote)
+                                .foregroundColor(.secondary)
+                            Picker("Appearance", selection: $volumeInputStepper) {
+                                ForEach(volumeInputSteppers, id: \.self) {
+                                    Text(String(Int($0)))
+                                }
+                            }
+                            .pickerStyle(.segmented)
+                            .onChange(of: volumeInputStepper) {
+                                defaults.set(volumeInputStepper, forKey: "volumeInputStepper")
+                            }
+                        }
+                    }
                 } header: {
                     Text("User Interface")
                 } footer: {}
@@ -315,18 +339,27 @@ struct ContentView: View {
                     }
                 } header: {
                     Text("Round Tipped Droppers")
-                        .padding(.top)
                 } footer: {
                     Text("Lotus Water ships with two types of droppers: \n•Round Tipped\n•Straight Tipped\n\nIf your bottle has a **rounded tip**, please select it above to ensure the recipe is accurate.")
                         .font(.footnote)
                         .foregroundColor(.secondary)
                 }
+                Section {
+                    Text("[Lotus Coffee Products](https://www.instagram.com/lotus.coffee.products) is:\n\n[Nick Chapman](https://www.instagram.com/nick.chapman.loves.coffee) (Founder)\n[Lance Hedrick](https://www.instagram.com/lancehedrick) (Co-Founder)")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                } header: {
+                    Text("Acknowledgements")
+                } footer: {}
             }
                 .tabItem {
                     Label("Settings", systemImage: "slider.horizontal.3")
                 }
         }
         .onAppear {
+            if 0.0 >= volumeInputStepper {
+                volumeInputStepper = 5.0
+            }
             calculateMultipliers()
         }
     }
