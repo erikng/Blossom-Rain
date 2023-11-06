@@ -37,15 +37,20 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Form {
-                Section() {
+                Section {
                     Picker("Recipes", selection: $recipe) {
+                        #if !os(macOS)
                         Text("").tag(Recipes.none)
+                        #endif
                         Text("Light & Bright").tag(Recipes.light_and_bright)
                         Text("Light & Bright (Espresso)").tag(Recipes.light_and_bright_espresso)
                         Text("Rao/Perger").tag(Recipes.rao_perger)
                         Text("Simple & Sweet").tag(Recipes.simple_and_sweet)
                         Text("Simple & Sweet (Espresso)").tag(Recipes.simple_and_sweet_espresso)
                     }
+                        #if os(macOS)
+                        .pickerStyle(.inline)
+                        #endif
                     .onChange(of: recipe) {
                         if recipe == .light_and_bright {
                             calciumDropCount = 60.0
@@ -80,34 +85,61 @@ struct ContentView: View {
                         }
                     }
                 }
-                Section(header: Text("Volume")) {
+                Section {
                     Picker("Unit", selection: $unit) {
                         Text("Milliliter").tag(Units.milliliter)
                         Text("Liter").tag(Units.liter)
                         Text("Gallon").tag(Units.gallon)
                     }
+                        #if os(macOS)
+                        .pickerStyle(.inline)
+                        #endif
                     if useManualVolumeInput {
                         if unit == .milliliter {
                             HStack {
-                                TextField("Enter your desired volume in milliliters", value: $mlVolume, formatter: numberZeroStringFormatter)
+                                #if os(macOS)
+                                let mlText = "Volume (ml)"
+                                #else
+                                let mlText = "Enter your desired volume in milliliters"
+                                #endif
+                                TextField(mlText, value: $mlVolume, formatter: numberZeroStringFormatter)
                                     #if !os(macOS)
                                     .keyboardType(.numbersAndPunctuation)
+                                    #else
+                                    .frame(width: 450.0)
+                                    .fixedSize()
                                     #endif
                             }
                         }
                         if unit == .liter {
                             HStack {
-                                TextField("Enter your desired volume in liters", value: $lVolume, formatter: numberZeroStringFormatter)
+                                #if os(macOS)
+                                let lText = "Volume (l)"
+                                #else
+                                let lText = "Enter your desired volume in liters"
+                                #endif
+                                TextField(lText, value: $lVolume, formatter: numberZeroStringFormatter)
                                     #if !os(macOS)
                                     .keyboardType(.numbersAndPunctuation)
+                                    #else
+                                    .frame(width: 450.0)
+                                    .fixedSize()
                                     #endif
                             }
                         }
                         if unit == .gallon {
                             HStack {
-                                TextField("Enter your desired volume in gallons", value: $gVolume, formatter: numberZeroStringFormatter)
+                                #if os(macOS)
+                                let gText = "Volume (g)"
+                                #else
+                                let gText = "Enter your desired volume in gallons"
+                                #endif
+                                TextField(gText, value: $gVolume, formatter: numberZeroStringFormatter)
                                     #if !os(macOS)
                                     .keyboardType(.numbersAndPunctuation)
+                                    #else
+                                    .frame(width: 450.0)
+                                    .fixedSize()
                                     #endif
                             }
                         }
@@ -131,8 +163,11 @@ struct ContentView: View {
                             }
                         }
                     }
-                }
-                Section(header: Text("Drops")) {
+                } header: {
+                    Text("Volume")
+                } footer: {}
+                
+                Section {
                     HStack {
                         Text("Calcium")
                         Spacer()
@@ -150,8 +185,10 @@ struct ContentView: View {
                                 .bold()
                         }
                     }
+                    #if !os(macOS)
                     .foregroundColor(.white)
                     .listRowBackground(Color("Calcium"))
+                    #endif
                     HStack {
                         Text("Magnesium")
                         Spacer()
@@ -169,8 +206,10 @@ struct ContentView: View {
                                 .bold()
                         }
                     }
+                    #if !os(macOS)
                     .foregroundColor(.white)
                     .listRowBackground(Color("Magnesium"))
+                    #endif
                     HStack {
                         Text("Potassium")
                         Spacer()
@@ -189,8 +228,10 @@ struct ContentView: View {
                                 .bold()
                         }
                     }
+                    #if !os(macOS)
                     .foregroundColor(.white)
                     .listRowBackground(Color("Potassium"))
+                    #endif
                     HStack {
                         Text("Sodium")
                         Spacer()
@@ -209,9 +250,14 @@ struct ContentView: View {
                                 .bold()
                         }
                     }
+                    #if !os(macOS)
                     .foregroundColor(Color("SodiumText"))
                     .listRowBackground(Color("Sodium"))
-                }
+                    #endif
+                } header: {
+                    Text("Drops")
+                        .padding(.top)
+                } footer: {}
                 Text("Purchase these drops at [Lotus Coffee Products](https://lotuscoffeeproducts.com/collections/all)")
                     .font(.footnote)
                     .foregroundColor(.secondary)
@@ -269,6 +315,7 @@ struct ContentView: View {
                     }
                 } header: {
                     Text("Round Tipped Droppers")
+                        .padding(.top)
                 } footer: {
                     Text("Lotus Water ships with two types of droppers: \n•Round Tipped\n•Straight Tipped\n\nIf your bottle has a **rounded tip**, please select it above to ensure the recipe is accurate.")
                         .font(.footnote)
