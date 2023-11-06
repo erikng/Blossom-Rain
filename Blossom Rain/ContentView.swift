@@ -230,7 +230,7 @@ struct ContentView: View {
                         }
                     }
                     .onChange(of: useManualVolumeInput) {
-                        defaults.set(useManualVolumeInput, forKey: "roundTippedDropperCalcium")
+                        defaults.set(useManualVolumeInput, forKey: "useManualVolumeInput")
                         mlVolume = 0.0
                         lVolume = 0.0
                         gVolume = 0.0
