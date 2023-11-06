@@ -26,6 +26,13 @@ struct ContentView: View {
     @State private var magnesiumDropCount = 0.0
     @State private var potassiumDropCount = 0.0
     @State private var sodiumDropCount = 0.0
+    @State private var useManualVolumeInput = defaults.bool(forKey: "useManualVolumeInput")
+    private let numberZeroStringFormatter: NumberFormatter = {
+          let formatter = NumberFormatter()
+          formatter.numberStyle = .none
+        formatter.zeroSymbol = ""
+          return formatter
+      }()
 
     var body: some View {
         TabView {
@@ -79,22 +86,43 @@ struct ContentView: View {
                         Text("Liter").tag(Units.liter)
                         Text("Gallon").tag(Units.gallon)
                     }
-                    if unit == .milliliter {
-                        HStack {
-                            Slider(value: $mlVolume, in: 250...1000, step: 1)
-                            Text(String(Int(mlVolume)))
+                    if useManualVolumeInput {
+                        if unit == .milliliter {
+                            HStack {
+                                TextField("Enter your desired volume in milliliters", value: $mlVolume, formatter: numberZeroStringFormatter)
+                                    .keyboardType(.numbersAndPunctuation)
+                            }
                         }
-                    }
-                    if unit == .liter {
-                        HStack {
-                            Slider(value: $lVolume, in: 1...15, step: 1)
-                            Text(String(Int(lVolume)))
+                        if unit == .liter {
+                            HStack {
+                                TextField("Enter your desired volume in liters", value: $lVolume, formatter: numberZeroStringFormatter)
+                                    .keyboardType(.numbersAndPunctuation)
+                            }
                         }
-                    }
-                    if unit == .gallon {
-                        HStack {
-                            Slider(value: $gVolume, in: 1...5, step: 1)
-                            Text(String(Int(gVolume)))
+                        if unit == .gallon {
+                            HStack {
+                                TextField("Enter your desired volume in gallons", value: $gVolume, formatter: numberZeroStringFormatter)
+                                    .keyboardType(.numbersAndPunctuation)
+                            }
+                        }
+                    } else {
+                        if unit == .milliliter {
+                            HStack {
+                                Slider(value: $mlVolume, in: 0...1000, step: 5)
+                                Text(String(Int(mlVolume)))
+                            }
+                        }
+                        if unit == .liter {
+                            HStack {
+                                Slider(value: $lVolume, in: 0...20, step: 1)
+                                Text(String(Int(lVolume)))
+                            }
+                        }
+                        if unit == .gallon {
+                            HStack {
+                                Slider(value: $gVolume, in: 0...5, step: 1)
+                                Text(String(Int(gVolume)))
+                            }
                         }
                     }
                 }
@@ -186,6 +214,24 @@ struct ContentView: View {
                     Label("Recipes", systemImage: "waterbottle")
                 }
             Form {
+                Section {
+                    Toggle(isOn: $useManualVolumeInput) {
+                        VStack(alignment: .leading) {
+                            Text("Manual Volume Input")
+                            Text("If you would prefer to input the volume manually, select this option.")
+                                .font(.footnote)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    .onChange(of: useManualVolumeInput) {
+                        defaults.set(useManualVolumeInput, forKey: "roundTippedDropperCalcium")
+                        mlVolume = 0.0
+                        lVolume = 0.0
+                        gVolume = 0.0
+                    }
+                } header: {
+                    Text("User Interface")
+                } footer: {}
                 Section {
                     Toggle(isOn: $roundTippedDropperCalcium) {
                         Text("Calcium")
