@@ -1,3 +1,11 @@
+---
+layout: default
+title: Home
+nav_order: 1
+description: "Blossom Rain is an iOS, iPadOS and Mac application for easily crafting your Lotus Water Drops."
+permalink: /
+---
+
 # Blossom Rain
 ![AppIcon](/assets/AppIcon.png)
 
@@ -7,3 +15,5 @@ To utilize all of the features available, please use iOS/iPadOS 17 or higher and
 
 ## Getting Support
 Please go to the [GitHub Issues](https://github.com/erikng/Blossom-Rain/issues) page to submit any potential issues you are experiencing.
+
+If you are unable to use GitHub please email [us](mailto:blossomrain@skyedesign.io)

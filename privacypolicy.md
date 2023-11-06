@@ -1,3 +1,9 @@
+---
+title: Privacy Policy
+has_children: false
+nav_order: 2
+---
+
 **Privacy Policy**
 
 Erik Gomez built the Blossom Rain app as an Open Source app. This SERVICE is provided by Erik Gomez at no cost and is intended for use as is.
