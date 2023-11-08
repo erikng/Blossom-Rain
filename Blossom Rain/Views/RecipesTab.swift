@@ -81,7 +81,7 @@ struct RecipesTab: View {
                     Spacer()
                     if brState.unit == .milliliter {
                         let calculation = Int(round((calciumComposition.baseMultiplier*calciumComposition.partsPerMillionMultiplier*brState.calciumPartsPerMillion)*(brState.unitVolume/calciumComposition.mlVolumeDivider)/brState.calciumDropperTypeMultiplier))
-                        Text(String(brState.calciumDropCount))
+                        Text(String(calculation))
                             .bold()
                     } else if brState.unit == .liter {
                         let calculation = Int(round((calciumComposition.baseMultiplier*calciumComposition.partsPerMillionMultiplier*brState.calciumPartsPerMillion)*(brState.unitVolume/calciumComposition.lVolumeDivider)/brState.calciumDropperTypeMultiplier))
