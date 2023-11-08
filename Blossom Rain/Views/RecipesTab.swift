@@ -81,17 +81,21 @@ struct RecipesTab: View {
                 HStack {
                     Text("Calcium")
                     Spacer()
-                    if brState.unit == .milliliter {
-                        Text(String(Int(round((calciumComposition.baseMultiplier*calciumComposition.partsPerMillionMultiplier*brState.calciumPartsPerMillion)*(brState.unitVolume/calciumComposition.mlVolumeDivider)/brState.calciumDropperTypeMultiplier))))
-                            .bold()
-                    } else if brState.unit == .liter {
-                        Text(String(Int(round((calciumComposition.baseMultiplier*calciumComposition.partsPerMillionMultiplier*brState.calciumPartsPerMillion)*(brState.unitVolume/calciumComposition.lVolumeDivider)/brState.calciumDropperTypeMultiplier))))
-                            .bold()
-                    } else if brState.unit == .gallon {
-                        Text(String(Int(round((calciumComposition.baseMultiplier*calciumComposition.partsPerMillionMultiplier*brState.calciumPartsPerMillion)*(brState.unitVolume/(calciumComposition.gPrimaryVolumeDivider/calciumComposition.gSecondaryVolumeDivider))/brState.calciumDropperTypeMultiplier))))
-                            .bold()
-                    }
-
+                    let calciumDropCount: Int = {
+                        let baseMultiplier = calciumComposition.baseMultiplier * calciumComposition.partsPerMillionMultiplier * brState.calciumPartsPerMillion
+                        let unitVolume: Double
+                        switch brState.unit {
+                            case .milliliter:
+                                unitVolume = brState.unitVolume / calciumComposition.mlVolumeDivider
+                            case .liter:
+                                unitVolume = brState.unitVolume / calciumComposition.lVolumeDivider
+                            default:
+                                unitVolume = brState.unitVolume / (calciumComposition.gPrimaryVolumeDivider / calciumComposition.gSecondaryVolumeDivider)
+                        }
+                        return Int(round(baseMultiplier * unitVolume / brState.calciumDropperTypeMultiplier))
+                    }()
+                    Text("\(calciumDropCount)")
+                        .bold()
                 }
                 #if !os(macOS)
                 .foregroundColor(.white)
@@ -100,16 +104,21 @@ struct RecipesTab: View {
                 HStack {
                     Text("Magnesium")
                     Spacer()
-                    if brState.unit == .milliliter {
-                        Text(String(Int(round((magnesiumComposition.baseMultiplier*magnesiumComposition.partsPerMillionMultiplier*brState.magnesiumPartsPerMillion)*(brState.unitVolume/magnesiumComposition.mlVolumeDivider)/brState.magnesiumDropperTypeMultiplier))))
-                            .bold()
-                    } else if brState.unit == .liter {
-                        Text(String(Int(round((magnesiumComposition.baseMultiplier*magnesiumComposition.partsPerMillionMultiplier*brState.magnesiumPartsPerMillion)*(brState.unitVolume/magnesiumComposition.lVolumeDivider)/brState.magnesiumDropperTypeMultiplier))))
-                            .bold()
-                    } else if brState.unit == .gallon {
-                        Text(String(Int(round((magnesiumComposition.baseMultiplier*magnesiumComposition.partsPerMillionMultiplier*brState.magnesiumPartsPerMillion)*(brState.unitVolume/(magnesiumComposition.gPrimaryVolumeDivider/magnesiumComposition.gSecondaryVolumeDivider))/brState.magnesiumDropperTypeMultiplier))))
-                            .bold()
-                    }
+                    let magnesiumDropCount: Int = {
+                        let baseMultiplier = magnesiumComposition.baseMultiplier * magnesiumComposition.partsPerMillionMultiplier * brState.magnesiumPartsPerMillion
+                        let unitVolume: Double
+                        switch brState.unit {
+                            case .milliliter:
+                                unitVolume = brState.unitVolume / magnesiumComposition.mlVolumeDivider
+                            case .liter:
+                                unitVolume = brState.unitVolume / magnesiumComposition.lVolumeDivider
+                            default:
+                                unitVolume = brState.unitVolume / (magnesiumComposition.gPrimaryVolumeDivider / magnesiumComposition.gSecondaryVolumeDivider)
+                        }
+                        return Int(round(baseMultiplier * unitVolume / brState.magnesiumDropperTypeMultiplier))
+                    }()
+                    Text("\(magnesiumDropCount)")
+                        .bold()
                 }
                 #if !os(macOS)
                 .foregroundColor(.white)
@@ -118,16 +127,21 @@ struct RecipesTab: View {
                 HStack {
                     Text("Potassium")
                     Spacer()
-                    if brState.unit == .milliliter {
-                        Text(String(Int(round((potassiumComposition.baseMultiplier*potassiumComposition.partsPerMillionMultiplier*brState.potassiumPartsPerMillion)*(brState.unitVolume/potassiumComposition.mlVolumeDivider)/brState.potassiumDropperTypeMultiplier))))
-                            .bold()
-                    } else if brState.unit == .liter {
-                        Text(String(Int(round((potassiumComposition.baseMultiplier*potassiumComposition.partsPerMillionMultiplier*brState.potassiumPartsPerMillion)*(brState.unitVolume/potassiumComposition.lVolumeDivider)/brState.potassiumDropperTypeMultiplier))))
-                            .bold()
-                    } else if brState.unit == .gallon {
-                        Text(String(Int(round((potassiumComposition.baseMultiplier*potassiumComposition.partsPerMillionMultiplier*brState.potassiumPartsPerMillion)*(brState.unitVolume/(potassiumComposition.gPrimaryVolumeDivider/potassiumComposition.gSecondaryVolumeDivider))/brState.potassiumDropperTypeMultiplier))))
-                            .bold()
-                    }
+                    let potassiumDropCount: Int = {
+                        let baseMultiplier = potassiumComposition.baseMultiplier * potassiumComposition.partsPerMillionMultiplier * brState.potassiumPartsPerMillion
+                        let unitVolume: Double
+                        switch brState.unit {
+                            case .milliliter:
+                                unitVolume = brState.unitVolume / potassiumComposition.mlVolumeDivider
+                            case .liter:
+                                unitVolume = brState.unitVolume / potassiumComposition.lVolumeDivider
+                            default:
+                                unitVolume = brState.unitVolume / (potassiumComposition.gPrimaryVolumeDivider / potassiumComposition.gSecondaryVolumeDivider)
+                        }
+                        return Int(round(baseMultiplier * unitVolume / brState.potassiumDropperTypeMultiplier))
+                    }()
+                    Text("\(potassiumDropCount)")
+                        .bold()
                 }
                 #if !os(macOS)
                 .foregroundColor(.white)
@@ -136,16 +150,21 @@ struct RecipesTab: View {
                 HStack {
                     Text("Sodium")
                     Spacer()
-                    if brState.unit == .milliliter {
-                        Text(String(Int(round((sodiumComposition.baseMultiplier*sodiumComposition.partsPerMillionMultiplier*brState.sodiumPartsPerMillion)*(brState.unitVolume/sodiumComposition.mlVolumeDivider)/brState.sodiumDropperTypeMultiplier))))
-                            .bold()
-                    } else if brState.unit == .liter {
-                        Text(String(Int(round((sodiumComposition.baseMultiplier*sodiumComposition.partsPerMillionMultiplier*brState.sodiumPartsPerMillion)*(brState.unitVolume/sodiumComposition.lVolumeDivider)/brState.sodiumDropperTypeMultiplier))))
-                            .bold()
-                    } else if brState.unit == .gallon {
-                        Text(String(Int(round((sodiumComposition.baseMultiplier*sodiumComposition.partsPerMillionMultiplier*brState.sodiumPartsPerMillion)*(brState.unitVolume/(sodiumComposition.gPrimaryVolumeDivider/sodiumComposition.gSecondaryVolumeDivider))/brState.sodiumDropperTypeMultiplier))))
-                            .bold()
-                    }
+                    let sodiumDropCount: Int = {
+                        let baseMultiplier = sodiumComposition.baseMultiplier * sodiumComposition.partsPerMillionMultiplier * brState.sodiumPartsPerMillion
+                        let unitVolume: Double
+                        switch brState.unit {
+                            case .milliliter:
+                                unitVolume = brState.unitVolume / sodiumComposition.mlVolumeDivider
+                            case .liter:
+                                unitVolume = brState.unitVolume / sodiumComposition.lVolumeDivider
+                            default:
+                                unitVolume = brState.unitVolume / (sodiumComposition.gPrimaryVolumeDivider / sodiumComposition.gSecondaryVolumeDivider)
+                        }
+                        return Int(round(baseMultiplier * unitVolume / brState.sodiumDropperTypeMultiplier))
+                    }()
+                    Text("\(sodiumDropCount)")
+                        .bold()
                 }
                 #if !os(macOS)
                 .foregroundColor(Color("SodiumText"))
