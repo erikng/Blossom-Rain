@@ -83,15 +83,12 @@ struct RecipesTab: View {
                     Spacer()
                     let calciumDropCount: Int = {
                         let baseMultiplier = calciumComposition.baseMultiplier * calciumComposition.partsPerMillionMultiplier * brState.calciumPartsPerMillion
-                        let unitVolume: Double
-                        switch brState.unit {
-                            case .milliliter:
-                                unitVolume = brState.unitVolume / calciumComposition.mlVolumeDivider
-                            case .liter:
-                                unitVolume = brState.unitVolume / calciumComposition.lVolumeDivider
-                            default:
-                                unitVolume = brState.unitVolume / (calciumComposition.gPrimaryVolumeDivider / calciumComposition.gSecondaryVolumeDivider)
-                        }
+                        let unitVolume = unitVolumeCalculator(
+                            mlVolumeDivider: calciumComposition.mlVolumeDivider,
+                            lVolumeDivider: calciumComposition.lVolumeDivider,
+                            gPrimaryVolumeDivider: calciumComposition.gPrimaryVolumeDivider,
+                            gSecondaryVolumeDivider: calciumComposition.gSecondaryVolumeDivider
+                        )
                         return Int(round(baseMultiplier * unitVolume / brState.calciumDropperTypeMultiplier))
                     }()
                     Text("\(calciumDropCount)")
@@ -106,15 +103,12 @@ struct RecipesTab: View {
                     Spacer()
                     let magnesiumDropCount: Int = {
                         let baseMultiplier = magnesiumComposition.baseMultiplier * magnesiumComposition.partsPerMillionMultiplier * brState.magnesiumPartsPerMillion
-                        let unitVolume: Double
-                        switch brState.unit {
-                            case .milliliter:
-                                unitVolume = brState.unitVolume / magnesiumComposition.mlVolumeDivider
-                            case .liter:
-                                unitVolume = brState.unitVolume / magnesiumComposition.lVolumeDivider
-                            default:
-                                unitVolume = brState.unitVolume / (magnesiumComposition.gPrimaryVolumeDivider / magnesiumComposition.gSecondaryVolumeDivider)
-                        }
+                        let unitVolume = unitVolumeCalculator(
+                            mlVolumeDivider: magnesiumComposition.mlVolumeDivider,
+                            lVolumeDivider: magnesiumComposition.lVolumeDivider,
+                            gPrimaryVolumeDivider: magnesiumComposition.gPrimaryVolumeDivider,
+                            gSecondaryVolumeDivider: magnesiumComposition.gSecondaryVolumeDivider
+                        )
                         return Int(round(baseMultiplier * unitVolume / brState.magnesiumDropperTypeMultiplier))
                     }()
                     Text("\(magnesiumDropCount)")
@@ -129,15 +123,12 @@ struct RecipesTab: View {
                     Spacer()
                     let potassiumDropCount: Int = {
                         let baseMultiplier = potassiumComposition.baseMultiplier * potassiumComposition.partsPerMillionMultiplier * brState.potassiumPartsPerMillion
-                        let unitVolume: Double
-                        switch brState.unit {
-                            case .milliliter:
-                                unitVolume = brState.unitVolume / potassiumComposition.mlVolumeDivider
-                            case .liter:
-                                unitVolume = brState.unitVolume / potassiumComposition.lVolumeDivider
-                            default:
-                                unitVolume = brState.unitVolume / (potassiumComposition.gPrimaryVolumeDivider / potassiumComposition.gSecondaryVolumeDivider)
-                        }
+                        let unitVolume = unitVolumeCalculator(
+                            mlVolumeDivider: potassiumComposition.mlVolumeDivider,
+                            lVolumeDivider: potassiumComposition.lVolumeDivider,
+                            gPrimaryVolumeDivider: potassiumComposition.gPrimaryVolumeDivider,
+                            gSecondaryVolumeDivider: potassiumComposition.gSecondaryVolumeDivider
+                        )
                         return Int(round(baseMultiplier * unitVolume / brState.potassiumDropperTypeMultiplier))
                     }()
                     Text("\(potassiumDropCount)")
@@ -152,15 +143,12 @@ struct RecipesTab: View {
                     Spacer()
                     let sodiumDropCount: Int = {
                         let baseMultiplier = sodiumComposition.baseMultiplier * sodiumComposition.partsPerMillionMultiplier * brState.sodiumPartsPerMillion
-                        let unitVolume: Double
-                        switch brState.unit {
-                            case .milliliter:
-                                unitVolume = brState.unitVolume / sodiumComposition.mlVolumeDivider
-                            case .liter:
-                                unitVolume = brState.unitVolume / sodiumComposition.lVolumeDivider
-                            default:
-                                unitVolume = brState.unitVolume / (sodiumComposition.gPrimaryVolumeDivider / sodiumComposition.gSecondaryVolumeDivider)
-                        }
+                        let unitVolume = unitVolumeCalculator(
+                            mlVolumeDivider: sodiumComposition.mlVolumeDivider,
+                            lVolumeDivider: sodiumComposition.lVolumeDivider,
+                            gPrimaryVolumeDivider: sodiumComposition.gPrimaryVolumeDivider,
+                            gSecondaryVolumeDivider: sodiumComposition.gSecondaryVolumeDivider
+                        )
                         return Int(round(baseMultiplier * unitVolume / brState.sodiumDropperTypeMultiplier))
                     }()
                     Text("\(sodiumDropCount)")
@@ -181,6 +169,18 @@ struct RecipesTab: View {
             .tabItem {
                 Label("Recipes", systemImage: "waterbottle")
             }
+    }
+    func unitVolumeCalculator(mlVolumeDivider: Double, lVolumeDivider: Double, gPrimaryVolumeDivider: Double, gSecondaryVolumeDivider: Double) -> Double {
+        let unitVolume: Double
+        switch brState.unit {
+            case .milliliter:
+                unitVolume = brState.unitVolume / sodiumComposition.mlVolumeDivider
+            case .liter:
+                unitVolume = brState.unitVolume / sodiumComposition.lVolumeDivider
+            default:
+                unitVolume = brState.unitVolume / (sodiumComposition.gPrimaryVolumeDivider / sodiumComposition.gSecondaryVolumeDivider)
+        }
+        return unitVolume
     }
 }
 
