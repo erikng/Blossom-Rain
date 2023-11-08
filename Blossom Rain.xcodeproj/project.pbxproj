@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0359A2C02AFB0367007EDA49 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0359A2BF2AFB0367007EDA49 /* SettingsTab.swift */; };
 		0359A2C22AFB0460007EDA49 /* RecipesTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0359A2C12AFB0460007EDA49 /* RecipesTab.swift */; };
+		0359A2C42AFB0A6C007EDA49 /* Recipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0359A2C32AFB0A6C007EDA49 /* Recipes.swift */; };
+		0359A2C62AFB24D6007EDA49 /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0359A2C52AFB24D6007EDA49 /* Units.swift */; };
+		0359A2C82AFB2508007EDA49 /* Calculators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0359A2C72AFB2508007EDA49 /* Calculators.swift */; };
 		03E4EB092AF6ED130097B8FA /* Blossom_RainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4EB082AF6ED130097B8FA /* Blossom_RainApp.swift */; };
 		03E4EB0B2AF6ED130097B8FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4EB0A2AF6ED130097B8FA /* ContentView.swift */; };
 		03E4EB0D2AF6ED150097B8FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03E4EB0C2AF6ED150097B8FA /* Assets.xcassets */; };
@@ -38,6 +41,9 @@
 /* Begin PBXFileReference section */
 		0359A2BF2AFB0367007EDA49 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		0359A2C12AFB0460007EDA49 /* RecipesTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesTab.swift; sourceTree = "<group>"; };
+		0359A2C32AFB0A6C007EDA49 /* Recipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipes.swift; sourceTree = "<group>"; };
+		0359A2C52AFB24D6007EDA49 /* Units.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Units.swift; sourceTree = "<group>"; };
+		0359A2C72AFB2508007EDA49 /* Calculators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculators.swift; sourceTree = "<group>"; };
 		03E4EB052AF6ED130097B8FA /* Blossom Rain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blossom Rain.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03E4EB082AF6ED130097B8FA /* Blossom_RainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blossom_RainApp.swift; sourceTree = "<group>"; };
 		03E4EB0A2AF6ED130097B8FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -76,6 +82,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0359A2C92AFB2517007EDA49 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				03E4EB082AF6ED130097B8FA /* Blossom_RainApp.swift */,
+				03E4EB0A2AF6ED130097B8FA /* ContentView.swift */,
+				0359A2C12AFB0460007EDA49 /* RecipesTab.swift */,
+				0359A2BF2AFB0367007EDA49 /* SettingsTab.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		03E4EAFC2AF6ED130097B8FA = {
 			isa = PBXGroup;
 			children = (
@@ -99,10 +116,10 @@
 		03E4EB072AF6ED130097B8FA /* Blossom Rain */ = {
 			isa = PBXGroup;
 			children = (
-				03E4EB082AF6ED130097B8FA /* Blossom_RainApp.swift */,
-				03E4EB0A2AF6ED130097B8FA /* ContentView.swift */,
-				0359A2C12AFB0460007EDA49 /* RecipesTab.swift */,
-				0359A2BF2AFB0367007EDA49 /* SettingsTab.swift */,
+				0359A2C92AFB2517007EDA49 /* Views */,
+				0359A2C32AFB0A6C007EDA49 /* Recipes.swift */,
+				0359A2C72AFB2508007EDA49 /* Calculators.swift */,
+				0359A2C52AFB24D6007EDA49 /* Units.swift */,
 				03E4EB0C2AF6ED150097B8FA /* Assets.xcassets */,
 				03E4EB0E2AF6ED150097B8FA /* Blossom_Rain.entitlements */,
 				03E4EB0F2AF6ED150097B8FA /* Preview Content */,
@@ -265,8 +282,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0359A2C42AFB0A6C007EDA49 /* Recipes.swift in Sources */,
+				0359A2C62AFB24D6007EDA49 /* Units.swift in Sources */,
 				0359A2C02AFB0367007EDA49 /* SettingsTab.swift in Sources */,
 				0359A2C22AFB0460007EDA49 /* RecipesTab.swift in Sources */,
+				0359A2C82AFB2508007EDA49 /* Calculators.swift in Sources */,
 				03E4EB0B2AF6ED130097B8FA /* ContentView.swift in Sources */,
 				03E4EB092AF6ED130097B8FA /* Blossom_RainApp.swift in Sources */,
 			);

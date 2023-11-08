@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct SettingsTab: View {
-    @EnvironmentObject var appState: AppState
+    @EnvironmentObject var brState: BRState
     
     var body: some View {
         Form {
+            // Volume Input
             Section {
-                Toggle(isOn: $appState.useManualVolumeInput) {
+                Toggle(isOn: $brState.useManualVolumeInput) {
                     VStack(alignment: .leading) {
                         Text("Manual Volume Input")
                         Text("If you would prefer to input the volume manually, select this option.")
@@ -21,61 +22,45 @@ struct SettingsTab: View {
                             .foregroundColor(.secondary)
                     }
                 }
-                .onChange(of: appState.useManualVolumeInput) {
-                    defaults.set(appState.useManualVolumeInput, forKey: "useManualVolumeInput")
-                    appState.mlVolume = 0.0
-                    appState.lVolume = 0.0
-                    appState.gVolume = 0.0
+                .onChange(of: brState.useManualVolumeInput) {
+                    userDefaults.set(brState.useManualVolumeInput, forKey: "useManualVolumeInput")
+                    updateUnits()
                 }
                 
-                if !appState.useManualVolumeInput {
+                if !brState.useManualVolumeInput {
                     VStack(alignment: .leading) {
                         Text("Volume Input Steps (mL)")
                         Text("The amount of steps the **milliliter** slider will increase or decrease by.")
                             .font(.footnote)
                             .foregroundColor(.secondary)
-                        Picker("Appearance", selection: $appState.volumeInputStepper) {
-                            ForEach(appState.volumeInputSteppers, id: \.self) {
+                        Picker("Appearance", selection: $brState.volumeInputStepper) {
+                            ForEach(brState.volumeInputSteppers, id: \.self) {
                                 Text(String(Int($0)))
                             }
                         }
                         .pickerStyle(.segmented)
-                        .onChange(of: appState.volumeInputStepper) {
-                            defaults.set(appState.volumeInputStepper, forKey: "volumeInputStepper")
+                        .onChange(of: brState.volumeInputStepper) {
+                            userDefaults.set(brState.volumeInputStepper, forKey: "volumeInputStepper")
                         }
                     }
                 }
             } header: {
                 Text("User Interface")
             } footer: {}
+
+            // Round or Straight Tipped Droppers
             Section {
-                Toggle(isOn: $appState.roundTippedDropperCalcium) {
+                Toggle(isOn: $brState.roundTippedDropperCalcium) {
                     Text("Calcium")
                 }
-                .onChange(of: appState.roundTippedDropperCalcium) {
-                    defaults.set(appState.roundTippedDropperCalcium, forKey: "roundTippedDropperCalcium")
-                    calculateMultipliers()
-                }
-                Toggle(isOn: $appState.roundTippedDropperMagnesium) {
+                Toggle(isOn: $brState.roundTippedDropperMagnesium) {
                     Text("Magnesium")
                 }
-                .onChange(of: appState.roundTippedDropperMagnesium) {
-                    defaults.set(appState.roundTippedDropperMagnesium, forKey: "roundTippedDropperMagnesium")
-                    calculateMultipliers()
-                }
-                Toggle(isOn: $appState.roundTippedDropperPotassium) {
+                Toggle(isOn: $brState.roundTippedDropperPotassium) {
                     Text("Potassium")
                 }
-                .onChange(of: appState.roundTippedDropperPotassium) {
-                    defaults.set(appState.roundTippedDropperPotassium, forKey: "roundTippedDropperPotassium")
-                    calculateMultipliers()
-                }
-                Toggle(isOn: $appState.roundTippedDropperSodium) {
+                Toggle(isOn: $brState.roundTippedDropperSodium) {
                     Text("Sodium")
-                }
-                .onChange(of: appState.roundTippedDropperSodium) {
-                    defaults.set(appState.roundTippedDropperSodium, forKey: "roundTippedDropperSodium")
-                    calculateMultipliers()
                 }
             } header: {
                 Text("Round Tipped Droppers")
@@ -84,6 +69,24 @@ struct SettingsTab: View {
                     .font(.footnote)
                     .foregroundColor(.secondary)
             }
+            .onChange(of: brState.roundTippedDropperCalcium) {
+                userDefaults.set(brState.roundTippedDropperCalcium, forKey: "roundTippedDropperCalcium")
+                calculateMultipliers()
+            }
+            .onChange(of: brState.roundTippedDropperMagnesium) {
+                userDefaults.set(brState.roundTippedDropperMagnesium, forKey: "roundTippedDropperMagnesium")
+                calculateMultipliers()
+            }
+            .onChange(of: brState.roundTippedDropperPotassium) {
+                userDefaults.set(brState.roundTippedDropperPotassium, forKey: "roundTippedDropperPotassium")
+                calculateMultipliers()
+            }
+            .onChange(of: brState.roundTippedDropperSodium) {
+                userDefaults.set(brState.roundTippedDropperSodium, forKey: "roundTippedDropperSodium")
+                calculateMultipliers()
+            }
+            
+            // The LCP Team
             Section {
                 Text("[Lotus Coffee Products](https://www.instagram.com/lotus.coffee.products) is:\n\n[Nick Chapman](https://www.instagram.com/nick.chapman.loves.coffee) (Founder)\n[Lance Hedrick](https://www.instagram.com/lancehedrick) (Co-Founder)")
                     .font(.footnote)
@@ -100,6 +103,6 @@ struct SettingsTab: View {
 
 #Preview {
     SettingsTab()
-        .environmentObject(primaryState)
+        .environmentObject(mainBRState)
 }
 

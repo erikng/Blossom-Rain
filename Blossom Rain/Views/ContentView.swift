@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var appState: AppState
+    @EnvironmentObject var brState: BRState
 
     var body: some View {
         TabView {
@@ -16,9 +16,8 @@ struct ContentView: View {
             SettingsTab()
         }
         .onAppear {
-            if 0.0 >= appState.volumeInputStepper {
-                appState.volumeInputStepper = 5.0
-            }
+            updatePartsPerMillionValues()
+            updateUnits()
             calculateMultipliers()
         }
     }
@@ -26,5 +25,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .environmentObject(primaryState)
+        .environmentObject(mainBRState)
 }
