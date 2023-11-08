@@ -44,9 +44,22 @@ struct SettingsTab: View {
                         }
                     }
                 }
+                Toggle(isOn: $brState.disableIdleTimer) {
+                    VStack(alignment: .leading) {
+                        Text("Disable Screen Sleep")
+                        Text("Prevent the iOS device from going to sleep while the application running.")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                    }
+                    
+                }
             } header: {
                 Text("User Interface")
             } footer: {}
+                .onChange(of: brState.disableIdleTimer) {
+                    userDefaults.set(brState.disableIdleTimer, forKey: "disableIdleTimer")
+                    updateScreenIdleTimer()
+                }
 
             // Round or Straight Tipped Droppers
             Section {

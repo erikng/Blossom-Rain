@@ -17,6 +17,7 @@ struct ContentView: View {
         }
         .onAppear {
             updatePartsPerMillionValues()
+            updateScreenIdleTimer()
             updateUnits()
             calculateMultipliers()
         }
@@ -26,4 +27,12 @@ struct ContentView: View {
 #Preview {
     ContentView()
         .environmentObject(mainBRState)
+}
+
+func updateScreenIdleTimer() {
+    if mainBRState.disableIdleTimer {
+        UIApplication.shared.isIdleTimerDisabled = true
+    } else {
+        UIApplication.shared.isIdleTimerDisabled = false
+    }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 class BRState: ObservableObject {
     @Published var calciumDropperTypeMultiplier = 1.0
     @Published var calciumPartsPerMillion = 1.0
+    @Published var disableIdleTimer = userDefaults.bool(forKey: "disableIdleTimer")
     @Published var magnesiumDropperTypeMultiplier = 1.0
     @Published var magnesiumPartsPerMillion = 1.0
     @Published var numberZeroStringFormatter: NumberFormatter = {
