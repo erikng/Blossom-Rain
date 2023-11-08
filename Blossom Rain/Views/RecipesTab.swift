@@ -76,20 +76,19 @@ struct RecipesTab: View {
             } footer: {}
             
             Section {
+                // TODO: Refactor the calculations for all four minerals
+                // The only difference between each of these computed text values are the milliliter, liter, and gallon (primary, secondary) dividers
                 HStack {
                     Text("Calcium")
                     Spacer()
                     if brState.unit == .milliliter {
-                        let calculation = Int(round((calciumComposition.baseMultiplier*calciumComposition.partsPerMillionMultiplier*brState.calciumPartsPerMillion)*(brState.unitVolume/calciumComposition.mlVolumeDivider)/brState.calciumDropperTypeMultiplier))
-                        Text(String(calculation))
+                        Text(String(Int(round((calciumComposition.baseMultiplier*calciumComposition.partsPerMillionMultiplier*brState.calciumPartsPerMillion)*(brState.unitVolume/calciumComposition.mlVolumeDivider)/brState.calciumDropperTypeMultiplier))))
                             .bold()
                     } else if brState.unit == .liter {
-                        let calculation = Int(round((calciumComposition.baseMultiplier*calciumComposition.partsPerMillionMultiplier*brState.calciumPartsPerMillion)*(brState.unitVolume/calciumComposition.lVolumeDivider)/brState.calciumDropperTypeMultiplier))
-                        Text(String(calculation))
+                        Text(String(Int(round((calciumComposition.baseMultiplier*calciumComposition.partsPerMillionMultiplier*brState.calciumPartsPerMillion)*(brState.unitVolume/calciumComposition.lVolumeDivider)/brState.calciumDropperTypeMultiplier))))
                             .bold()
                     } else if brState.unit == .gallon {
-                        let calculation = Int(round((calciumComposition.baseMultiplier*calciumComposition.partsPerMillionMultiplier*brState.calciumPartsPerMillion)*(brState.unitVolume/(calciumComposition.gPrimaryVolumeDivider/calciumComposition.gSecondaryVolumeDivider))/brState.calciumDropperTypeMultiplier))
-                        Text(String(calculation))
+                        Text(String(Int(round((calciumComposition.baseMultiplier*calciumComposition.partsPerMillionMultiplier*brState.calciumPartsPerMillion)*(brState.unitVolume/(calciumComposition.gPrimaryVolumeDivider/calciumComposition.gSecondaryVolumeDivider))/brState.calciumDropperTypeMultiplier))))
                             .bold()
                     }
 
@@ -102,16 +101,13 @@ struct RecipesTab: View {
                     Text("Magnesium")
                     Spacer()
                     if brState.unit == .milliliter {
-                        let calculation = Int(round((magnesiumComposition.baseMultiplier*magnesiumComposition.partsPerMillionMultiplier*brState.magnesiumPartsPerMillion)*(brState.unitVolume/magnesiumComposition.mlVolumeDivider)/brState.magnesiumDropperTypeMultiplier))
-                        Text(String(calculation))
+                        Text(String(Int(round((magnesiumComposition.baseMultiplier*magnesiumComposition.partsPerMillionMultiplier*brState.magnesiumPartsPerMillion)*(brState.unitVolume/magnesiumComposition.mlVolumeDivider)/brState.magnesiumDropperTypeMultiplier))))
                             .bold()
                     } else if brState.unit == .liter {
-                        let calculation = Int(round((magnesiumComposition.baseMultiplier*magnesiumComposition.partsPerMillionMultiplier*brState.magnesiumPartsPerMillion)*(brState.unitVolume/magnesiumComposition.lVolumeDivider)/brState.magnesiumDropperTypeMultiplier))
-                        Text(String(calculation))
+                        Text(String(Int(round((magnesiumComposition.baseMultiplier*magnesiumComposition.partsPerMillionMultiplier*brState.magnesiumPartsPerMillion)*(brState.unitVolume/magnesiumComposition.lVolumeDivider)/brState.magnesiumDropperTypeMultiplier))))
                             .bold()
                     } else if brState.unit == .gallon {
-                        let calculation = Int(round((magnesiumComposition.baseMultiplier*magnesiumComposition.partsPerMillionMultiplier*brState.magnesiumPartsPerMillion)*(brState.unitVolume/(magnesiumComposition.gPrimaryVolumeDivider/magnesiumComposition.gSecondaryVolumeDivider))/brState.magnesiumDropperTypeMultiplier))
-                        Text(String(calculation))
+                        Text(String(Int(round((magnesiumComposition.baseMultiplier*magnesiumComposition.partsPerMillionMultiplier*brState.magnesiumPartsPerMillion)*(brState.unitVolume/(magnesiumComposition.gPrimaryVolumeDivider/magnesiumComposition.gSecondaryVolumeDivider))/brState.magnesiumDropperTypeMultiplier))))
                             .bold()
                     }
                 }
@@ -123,16 +119,13 @@ struct RecipesTab: View {
                     Text("Potassium")
                     Spacer()
                     if brState.unit == .milliliter {
-                        let calculation = Int(round((potassiumComposition.baseMultiplier*potassiumComposition.partsPerMillionMultiplier*brState.potassiumPartsPerMillion)*(brState.unitVolume/potassiumComposition.mlVolumeDivider)/brState.potassiumDropperTypeMultiplier))
-                        Text(String(calculation))
+                        Text(String(Int(round((potassiumComposition.baseMultiplier*potassiumComposition.partsPerMillionMultiplier*brState.potassiumPartsPerMillion)*(brState.unitVolume/potassiumComposition.mlVolumeDivider)/brState.potassiumDropperTypeMultiplier))))
                             .bold()
                     } else if brState.unit == .liter {
-                        let calculation = Int(round((potassiumComposition.baseMultiplier*potassiumComposition.partsPerMillionMultiplier*brState.potassiumPartsPerMillion)*(brState.unitVolume/potassiumComposition.lVolumeDivider)/brState.potassiumDropperTypeMultiplier))
-                        Text(String(calculation))
+                        Text(String(Int(round((potassiumComposition.baseMultiplier*potassiumComposition.partsPerMillionMultiplier*brState.potassiumPartsPerMillion)*(brState.unitVolume/potassiumComposition.lVolumeDivider)/brState.potassiumDropperTypeMultiplier))))
                             .bold()
                     } else if brState.unit == .gallon {
-                        let calculation = Int(round((potassiumComposition.baseMultiplier*potassiumComposition.partsPerMillionMultiplier*brState.potassiumPartsPerMillion)*(brState.unitVolume/(potassiumComposition.gPrimaryVolumeDivider/potassiumComposition.gSecondaryVolumeDivider))/brState.potassiumDropperTypeMultiplier))
-                        Text(String(calculation))
+                        Text(String(Int(round((potassiumComposition.baseMultiplier*potassiumComposition.partsPerMillionMultiplier*brState.potassiumPartsPerMillion)*(brState.unitVolume/(potassiumComposition.gPrimaryVolumeDivider/potassiumComposition.gSecondaryVolumeDivider))/brState.potassiumDropperTypeMultiplier))))
                             .bold()
                     }
                 }
@@ -144,16 +137,13 @@ struct RecipesTab: View {
                     Text("Sodium")
                     Spacer()
                     if brState.unit == .milliliter {
-                        let calculation = Int(round((sodiumComposition.baseMultiplier*sodiumComposition.partsPerMillionMultiplier*brState.sodiumPartsPerMillion)*(brState.unitVolume/sodiumComposition.mlVolumeDivider)/brState.sodiumDropperTypeMultiplier))
-                        Text(String(calculation))
+                        Text(String(Int(round((sodiumComposition.baseMultiplier*sodiumComposition.partsPerMillionMultiplier*brState.sodiumPartsPerMillion)*(brState.unitVolume/sodiumComposition.mlVolumeDivider)/brState.sodiumDropperTypeMultiplier))))
                             .bold()
                     } else if brState.unit == .liter {
-                        let calculation = Int(round((sodiumComposition.baseMultiplier*sodiumComposition.partsPerMillionMultiplier*brState.sodiumPartsPerMillion)*(brState.unitVolume/sodiumComposition.lVolumeDivider)/brState.sodiumDropperTypeMultiplier))
-                        Text(String(calculation))
+                        Text(String(Int(round((sodiumComposition.baseMultiplier*sodiumComposition.partsPerMillionMultiplier*brState.sodiumPartsPerMillion)*(brState.unitVolume/sodiumComposition.lVolumeDivider)/brState.sodiumDropperTypeMultiplier))))
                             .bold()
                     } else if brState.unit == .gallon {
-                        let calculation = Int(round((sodiumComposition.baseMultiplier*sodiumComposition.partsPerMillionMultiplier*brState.sodiumPartsPerMillion)*(brState.unitVolume/(sodiumComposition.gPrimaryVolumeDivider/sodiumComposition.gSecondaryVolumeDivider))/brState.sodiumDropperTypeMultiplier))
-                        Text(String(calculation))
+                        Text(String(Int(round((sodiumComposition.baseMultiplier*sodiumComposition.partsPerMillionMultiplier*brState.sodiumPartsPerMillion)*(brState.unitVolume/(sodiumComposition.gPrimaryVolumeDivider/sodiumComposition.gSecondaryVolumeDivider))/brState.sodiumDropperTypeMultiplier))))
                             .bold()
                     }
                 }
