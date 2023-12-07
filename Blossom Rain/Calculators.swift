@@ -21,7 +21,7 @@ struct MineralDropEquation: Codable, Hashable, Identifiable {
 let calciumComposition = MineralDropEquation(
     id: UUID(),
     baseMultiplier: 1.0,
-    partsPerMillionMultiplier: 0.55,
+    partsPerMillionMultiplier: 0.56,
     mlVolumeDivider: 4500.0,
     lVolumeDivider: 4.5,
     gPrimaryVolumeDivider: 4500.0,
@@ -30,7 +30,7 @@ let calciumComposition = MineralDropEquation(
 let magnesiumComposition = MineralDropEquation(
     id: UUID(),
     baseMultiplier: 1.0,
-    partsPerMillionMultiplier: 0.54,
+    partsPerMillionMultiplier: 0.56,
     mlVolumeDivider: 4500.0,
     lVolumeDivider: 4.5,
     gPrimaryVolumeDivider: 4500.0,
@@ -48,7 +48,7 @@ let potassiumComposition = MineralDropEquation(
 let sodiumComposition = MineralDropEquation(
     id: UUID(),
     baseMultiplier: 2.0,
-    partsPerMillionMultiplier: 0.58,
+    partsPerMillionMultiplier: 0.56,
     mlVolumeDivider: 4500.0,
     lVolumeDivider: 4.5,
     gPrimaryVolumeDivider: 4500.0,
