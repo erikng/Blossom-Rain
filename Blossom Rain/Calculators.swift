@@ -68,3 +68,7 @@ func updatePartsPerMillionValues() {
     mainBRState.potassiumPartsPerMillion = mainBRState.recipe.selectedRecipe.potassiumPartsPerMillion
     mainBRState.sodiumPartsPerMillion = mainBRState.recipe.selectedRecipe.sodiumPartsPerMillion
 }
+
+func updateDescription() {
+    mainBRState.recipeDescription = mainBRState.recipe.selectedRecipe.description
+}

@@ -22,6 +22,7 @@ class BRState: ObservableObject {
     @Published var potassiumDropperTypeMultiplier = 1.0
     @Published var potassiumPartsPerMillion = 1.0
     @Published var recipe: Recipes = .light_and_bright
+    @Published var recipeDescription: String = lightAndBright.description
     @Published var roundTippedDropperCalcium = userDefaults.bool(forKey: "roundTippedDropperCalcium")
     @Published var roundTippedDropperMagnesium = userDefaults.bool(forKey: "roundTippedDropperMagnesium")
     @Published var roundTippedDropperPotassium = userDefaults.bool(forKey: "roundTippedDropperPotassium")

@@ -8,9 +8,19 @@
 import SwiftUI
 
 // Configure the recipes
+let brightAndJuicy = Recipe(
+    id: UUID(),
+    name: "Bright & Juicy",
+    description: "Developed by [Mike Bawden](https://www.instagram.com/micsmox), Bright and Juicy gives a bright and balanced cup with a juicy mouthfeel. This is an approachable recipe and works well on a variety of coffees and brewers, but particularly shines with light to medium-light roasted washed coffees.",
+    calciumPartsPerMillion: 36.0,
+    magnesiumPartsPerMillion: 36.0,
+    potassiumPartsPerMillion: 9.0,
+    sodiumPartsPerMillion: 9.0
+)
 let lightAndBright = Recipe(
     id: UUID(),
     name: "Light & Bright",
+    description: "Developed by the incredibly talented [Lance Hedrick](https://www.instagram.com/lancehedrick), Light and Bright was created with one goal in mind: To find a water recipe that highlights the acidity in coffee while also maintaining a high degree of flavor clarity. After hours of cupping different recipes, a clear winner stood out amongst the rest. This recipe is best used with lightly roasted coffee when a bright and flavorful cup is desired.",
     calciumPartsPerMillion: 60.0,
     magnesiumPartsPerMillion: 0.0,
     potassiumPartsPerMillion: 25.0,
@@ -20,6 +30,7 @@ let lightAndBright = Recipe(
 let lightAndBrightEspresso = Recipe(
     id: UUID(),
     name: "Light & Bright (Espresso)",
+    description: "",
     calciumPartsPerMillion: 0.0,
     magnesiumPartsPerMillion: 20.0,
     potassiumPartsPerMillion: 45.0,
@@ -29,6 +40,7 @@ let lightAndBrightEspresso = Recipe(
 let raoPerger = Recipe(
     id: UUID(),
     name: "Rao/Perger",
+    description: "A very well balanced recipe and usable for pretty much anything. While very similar to our Simple and Sweet with regards to its total GH and KH, the increased magnesium helps create a more bodied and complex cup while the usage of equal parts sodium and potassium give a moderate acidity that is bright but not sharp and smooth but not boring.",
     calciumPartsPerMillion: 27.2,
     magnesiumPartsPerMillion: 60.0,
     potassiumPartsPerMillion: 20.0,
@@ -38,6 +50,7 @@ let raoPerger = Recipe(
 let simpleAndSweet = Recipe(
     id: UUID(),
     name: "Simple & Sweet",
+    description: "Crafted by the wonderfully talented [Lance Hedrick](https://www.instagram.com/lancehedrick), Simple and Sweet was designed to help your brew a smooth and balanced cup suitable for any style of coffee. All four ingredients are used for this recipe with the goal being to bring out the best each mineral has to offer. If this is your first time using Lotus Water or if you simply don’t know what water to use for a new coffee this is a great place to start.",
     calciumPartsPerMillion: 60.0,
     magnesiumPartsPerMillion: 30.0,
     potassiumPartsPerMillion: 15.0,
@@ -47,6 +60,7 @@ let simpleAndSweet = Recipe(
 let simpleAndSweetEspresso = Recipe(
     id: UUID(),
     name: "Simple & Sweet (Espresso)",
+    description: "",
     calciumPartsPerMillion: 0.0,
     magnesiumPartsPerMillion: 20.0,
     potassiumPartsPerMillion: 0.0,
@@ -55,13 +69,14 @@ let simpleAndSweetEspresso = Recipe(
 
 // Recipes
 enum Recipes: String, CaseIterable, Identifiable {
-    case light_and_bright, light_and_bright_espresso, rao_perger, simple_and_sweet, simple_and_sweet_espresso
+    case bright_and_juicy, light_and_bright, light_and_bright_espresso, rao_perger, simple_and_sweet, simple_and_sweet_espresso
     var id: Self { self }
 }
 
 extension Recipes {
     var selectedRecipe: Recipe {
         switch self {
+        case .bright_and_juicy: return brightAndJuicy
         case .light_and_bright: return lightAndBright
         case .light_and_bright_espresso: return lightAndBrightEspresso
         case .rao_perger: return raoPerger
@@ -74,6 +89,7 @@ extension Recipes {
 struct Recipe: Codable, Hashable, Identifiable {
     var id: UUID
     var name: String
+    var description: String
     var calciumPartsPerMillion: Double
     var magnesiumPartsPerMillion: Double
     var potassiumPartsPerMillion: Double

@@ -24,6 +24,7 @@ struct RecipesTab: View {
                     #endif
                     .onChange(of: brState.recipe) {
                         updatePartsPerMillionValues()
+                        updateDescription()
                     }
             }
             Section {
@@ -162,9 +163,23 @@ struct RecipesTab: View {
                 Text("Drops")
                     .padding(.top)
             } footer: {}
-            Text("Purchase these drops at [Lotus Coffee Products](https://lotuscoffeeproducts.com/collections/all)")
-                .font(.footnote)
-                .foregroundColor(.secondary)
+            
+            Section {
+                HStack {
+                    if !brState.recipeDescription.isEmpty {
+                        Text(.init(brState.recipeDescription))
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                    }
+                }
+            } header: {
+                Text("Recipe Information")
+            } footer: {
+                Text("Purchase these drops at [Lotus Coffee Products](https://lotuscoffeeproducts.com/collections/all)")
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                    .padding(.top)
+            }
         }
             .tabItem {
                 Label("Recipes", systemImage: "waterbottle")

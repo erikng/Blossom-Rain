@@ -17,6 +17,7 @@ struct ContentView: View {
         }
         .onAppear {
             updatePartsPerMillionValues()
+            updateDescription()
             updateScreenIdleTimer()
             updateUnits()
             calculateMultipliers()
