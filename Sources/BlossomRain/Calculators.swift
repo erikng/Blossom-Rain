@@ -5,7 +5,7 @@
 //  Created by Erik Gomez on 11/7/23.
 //
 
-import SwiftUI
+import Foundation
 
 // Recipe Calculations
 struct MineralDropEquation: Codable, Hashable, Identifiable {
@@ -55,11 +55,11 @@ let sodiumComposition = MineralDropEquation(
     gSecondaryVolumeDivider: 3785.0
 )
 
-func calculateMultipliers() {
-    mainBRState.calciumDropperTypeMultiplier = mainBRState.roundTippedDropperCalcium ? 1.0 : 0.56
-    mainBRState.magnesiumDropperTypeMultiplier = mainBRState.roundTippedDropperMagnesium ? 1.0 : 0.56
-    mainBRState.potassiumDropperTypeMultiplier = mainBRState.roundTippedDropperPotassium ? 1.0 : 0.56
-    mainBRState.sodiumDropperTypeMultiplier = mainBRState.roundTippedDropperSodium ? 1.0 : 0.56
+func calculateMultipliers(roundTippedDropperCalcium: Bool, roundTippedDropperMagnesium: Bool, roundTippedDropperPotassium: Bool, roundTippedDropperSodium: Bool) {
+    mainBRState.calciumDropperTypeMultiplier = roundTippedDropperCalcium ? 1.0 : 0.56
+    mainBRState.magnesiumDropperTypeMultiplier = roundTippedDropperMagnesium ? 1.0 : 0.56
+    mainBRState.potassiumDropperTypeMultiplier = roundTippedDropperPotassium ? 1.0 : 0.56
+    mainBRState.sodiumDropperTypeMultiplier = roundTippedDropperSodium ? 1.0 : 0.56
 }
 
 func updatePartsPerMillionValues() {

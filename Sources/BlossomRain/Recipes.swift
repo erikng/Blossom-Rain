@@ -5,7 +5,39 @@
 //  Created by Erik Gomez on 11/7/23.
 //
 
-import SwiftUI
+import Foundation
+
+// Define the Recipe struct
+struct Recipe: Codable, Hashable, Identifiable {
+    var id: UUID
+    var name: String
+    var description: String
+    var calciumPartsPerMillion: Double
+    var magnesiumPartsPerMillion: Double
+    var potassiumPartsPerMillion: Double
+    var sodiumPartsPerMillion: Double
+}
+
+// Enum for Recipes that conforms to Identifiable using String as the ID
+enum Recipes: String, CaseIterable, Identifiable {
+    case bright_and_juicy, light_and_bright, light_and_bright_espresso, rao_perger, simple_and_sweet, simple_and_sweet_espresso
+    
+    // Use the rawValue of the enum as the id
+    var id: String { self.rawValue }
+    
+    // Return the associated Recipe for each case
+    var selectedRecipe: Recipe {
+        switch self {
+        case .bright_and_juicy: return brightAndJuicy
+        case .light_and_bright: return lightAndBright
+        case .light_and_bright_espresso: return lightAndBrightEspresso
+        case .rao_perger: return raoPerger
+        case .simple_and_sweet: return simpleAndSweet
+        case .simple_and_sweet_espresso: return simpleAndSweetEspresso
+        }
+    }
+}
+
 
 // Configure the recipes
 let brightAndJuicy = Recipe(
@@ -17,6 +49,7 @@ let brightAndJuicy = Recipe(
     potassiumPartsPerMillion: 9.0,
     sodiumPartsPerMillion: 9.0
 )
+
 let lightAndBright = Recipe(
     id: UUID(),
     name: "Light & Bright",
@@ -30,7 +63,7 @@ let lightAndBright = Recipe(
 let lightAndBrightEspresso = Recipe(
     id: UUID(),
     name: "Light & Bright (Espresso)",
-    description: "",
+    description: "Developed by the incredibly talented [Lance Hedrick](https://www.instagram.com/lancehedrick), Light and Bright was created with one goal in mind: To find a water recipe that highlights the acidity in coffee while also maintaining a high degree of flavor clarity. After hours of cupping different recipes, a clear winner stood out amongst the rest. This recipe is best used with lightly roasted coffee when a bright and flavorful cup is desired.",
     calciumPartsPerMillion: 0.0,
     magnesiumPartsPerMillion: 20.0,
     potassiumPartsPerMillion: 45.0,
@@ -66,32 +99,3 @@ let simpleAndSweetEspresso = Recipe(
     potassiumPartsPerMillion: 0.0,
     sodiumPartsPerMillion: 55.0
 )
-
-// Recipes
-enum Recipes: String, CaseIterable, Identifiable {
-    case bright_and_juicy, light_and_bright, light_and_bright_espresso, rao_perger, simple_and_sweet, simple_and_sweet_espresso
-    var id: Self { self }
-}
-
-extension Recipes {
-    var selectedRecipe: Recipe {
-        switch self {
-        case .bright_and_juicy: return brightAndJuicy
-        case .light_and_bright: return lightAndBright
-        case .light_and_bright_espresso: return lightAndBrightEspresso
-        case .rao_perger: return raoPerger
-        case .simple_and_sweet: return simpleAndSweet
-        case .simple_and_sweet_espresso: return simpleAndSweetEspresso
-        }
-    }
-}
-
-struct Recipe: Codable, Hashable, Identifiable {
-    var id: UUID
-    var name: String
-    var description: String
-    var calciumPartsPerMillion: Double
-    var magnesiumPartsPerMillion: Double
-    var potassiumPartsPerMillion: Double
-    var sodiumPartsPerMillion: Double
-}

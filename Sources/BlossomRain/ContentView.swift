@@ -7,20 +7,34 @@
 
 import SwiftUI
 
-struct ContentView: View {
+public struct ContentView: View {
     @EnvironmentObject var brState: BRState
-
-    var body: some View {
+    @AppStorage("disableIdleTimer") var disableIdleTimer: Bool = false
+    @AppStorage("roundTippedDropperCalcium") var roundTippedDropperCalcium: Bool = false
+    @AppStorage("roundTippedDropperMagnesium") var roundTippedDropperMagnesium: Bool = false
+    @AppStorage("roundTippedDropperPotassium") var roundTippedDropperPotassium: Bool = false
+    @AppStorage("roundTippedDropperSodium") var roundTippedDropperSodium: Bool = false
+    
+    public init() {
+    }
+    
+    public var body: some View {
         TabView {
             RecipesTab()
+                .tabItem {
+                    Label(title: { Text("Recipes") }, icon: { Image("waterbottle-skip", bundle: .module) })
+                }
             SettingsTab()
+                .tabItem {
+                    Label(title: { Text("Settings") }, icon: { Image("slider.horizontal.3-skip", bundle: .module) })
+                }
         }
         .onAppear {
             updatePartsPerMillionValues()
             updateDescription()
-            updateScreenIdleTimer()
+            updateScreenIdleTimer(disableIdleTimer: disableIdleTimer)
             updateUnits()
-            calculateMultipliers()
+            calculateMultipliers(roundTippedDropperCalcium: roundTippedDropperCalcium, roundTippedDropperMagnesium: roundTippedDropperMagnesium, roundTippedDropperPotassium: roundTippedDropperPotassium, roundTippedDropperSodium: roundTippedDropperSodium)
         }
     }
 }
@@ -30,8 +44,8 @@ struct ContentView: View {
         .environmentObject(mainBRState)
 }
 
-func updateScreenIdleTimer() {
-    if mainBRState.disableIdleTimer {
+func updateScreenIdleTimer(disableIdleTimer: Bool) {
+    if disableIdleTimer {
         UIApplication.shared.isIdleTimerDisabled = true
     } else {
         UIApplication.shared.isIdleTimerDisabled = false
