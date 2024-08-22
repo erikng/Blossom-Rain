@@ -1,6 +1,15 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "[Lotus Coffee Products](https://www.instagram.com/lotus.coffee.products) is:\n\n[Nick Chapman](https://www.instagram.com/nick.chapman.loves.coffee) (Founder)\n[Lance Hedrick](https://www.instagram.com/lancehedrick) (Co-Founder)" : {
+
+    },
+    "%lld" : {
+
+    },
+    "Acknowledgements" : {
+
+    },
     "Appearance" : {
       "localizations" : {
         "es" : {
@@ -29,7 +38,14 @@
         }
       }
     },
+    "Calcium" : {
+
+    },
+    "Close" : {
+
+    },
     "Dark" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -57,7 +73,14 @@
         }
       }
     },
+    "Disable Screen Sleep" : {
+
+    },
+    "Drops" : {
+
+    },
     "Hello %@!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -86,6 +109,7 @@
       }
     },
     "Home" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -113,7 +137,11 @@
         }
       }
     },
+    "If you would prefer to input the volume manually, select this option." : {
+
+    },
     "Item %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -142,6 +170,7 @@
       }
     },
     "Light" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -169,7 +198,17 @@
         }
       }
     },
+    "Lotus Water ships with two types of droppers: \n•Round Tipped\n•Straight Tipped\n\nIf your bottle has a **rounded tip**, please select it above to ensure the recipe is accurate." : {
+
+    },
+    "Magnesium" : {
+
+    },
+    "Manual Volume Input" : {
+
+    },
     "Name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -197,7 +236,11 @@
         }
       }
     },
+    "Potassium" : {
+
+    },
     "Powered by %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -225,7 +268,23 @@
         }
       }
     },
+    "Prevent the device from going to sleep while the application running." : {
+
+    },
+    "Purchase these drops at [Lotus Coffee Products](https://lotuscoffeeproducts.com/collections/all)" : {
+
+    },
+    "Recipe Information" : {
+
+    },
+    "Recipes" : {
+
+    },
+    "Round Tipped Droppers" : {
+
+    },
     "Screen %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -281,7 +340,11 @@
         }
       }
     },
+    "Sodium" : {
+
+    },
     "System" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -309,7 +372,23 @@
         }
       }
     },
+    "The amount of steps the **milliliter** slider will increase or decrease by." : {
+
+    },
+    "Unit" : {
+
+    },
+    "User Interface" : {
+
+    },
+    "Volume" : {
+
+    },
+    "Volume Input Steps (mL)" : {
+
+    },
     "Welcome" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
