@@ -9,7 +9,7 @@ import PackageDescription
 let package = Package(
     name: "Blossom-Rain",
     defaultLocalization: "en",
-    platforms: [.iOS(.v17), .tvOS(.v17), .watchOS(.v10), .macCatalyst(.v17)],
+    platforms: [.iOS(.v17), .macOS(.v14), .tvOS(.v17), .watchOS(.v10), .macCatalyst(.v17)],
     products: [
         .library(name: "BlossomRainApp", type: .dynamic, targets: ["BlossomRain"]),
     ],
