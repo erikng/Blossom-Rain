@@ -143,8 +143,7 @@ struct SettingsTab: View {
     }
 }
 
-#Preview {
-    SettingsTab()
-        .environmentObject(mainBRState)
-}
-
+//#Preview {
+//    SettingsTab()
+//        .environmentObject(mainBRState)
+//}

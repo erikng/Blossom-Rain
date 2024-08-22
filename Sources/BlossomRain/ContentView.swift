@@ -39,11 +39,6 @@ public struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
-        .environmentObject(mainBRState)
-}
-
 func updateScreenIdleTimer(disableIdleTimer: Bool) {
     #if !os(macOS)
     if disableIdleTimer {
@@ -53,3 +48,8 @@ func updateScreenIdleTimer(disableIdleTimer: Bool) {
     }
     #endif
 }
+
+//#Preview {
+//    ContentView()
+//        .environmentObject(mainBRState)
+//}
