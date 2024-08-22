@@ -168,7 +168,7 @@ struct RecipesTab: View {
                 Section {
                     HStack {
                         if !brState.recipeDescription.isEmpty {
-                            Text(try! AttributedString(markdown: brState.recipeDescription))
+                            Text(LocalizedStringKey(brState.recipeDescription))
                                 .font(.footnote)
                                 .foregroundColor(.secondary)
                         }
