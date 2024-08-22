@@ -9,3 +9,5 @@ DerivedData/
 .swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 .netrc
 .gradle
+Android/app/skye-design-key.jks
+Android/app/keystore.properties
