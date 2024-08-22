@@ -106,25 +106,6 @@ struct SettingsTab: View {
                     Text("[Lotus Coffee Products](https://www.instagram.com/lotus.coffee.products) is:\n\n[Nick Chapman](https://www.instagram.com/nick.chapman.loves.coffee) (Founder)\n[Lance Hedrick](https://www.instagram.com/lancehedrick) (Co-Founder)")
                         .font(.footnote)
                         .foregroundColor(.secondary)
-                    //                VStack(alignment: .leading, spacing: 5) {
-                    //                    HStack(spacing: 1) {
-                    //                        Link("Lotus Coffee Products", destination: URL(string: "https://www.instagram.com/lotus.coffee.products")!)
-                    //                        Text("is:")
-                    //                            .foregroundColor(.secondary)
-                    //                    }
-                    //                    .padding(.bottom)
-                    //                    HStack(spacing: 1) {
-                    //                        Link("Nick Chapman", destination: URL(string: "https://www.instagram.com/nick.chapman.loves.coffee")!)
-                    //                        Text("(Founder)")
-                    //                            .foregroundColor(.secondary)
-                    //                    }
-                    //                    HStack(spacing: 1) {
-                    //                        Link("Lance Hedrick", destination: URL(string: "https://www.instagram.com/lancehedrick")!)
-                    //                        Text("(Co-Founder)")
-                    //                            .foregroundColor(.secondary)
-                    //                    }
-                    //                }
-                    //                .font(.footnote)
                 } header: {
                     Text("Acknowledgements")
                 } footer: {}
