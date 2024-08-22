@@ -45,9 +45,11 @@ public struct ContentView: View {
 }
 
 func updateScreenIdleTimer(disableIdleTimer: Bool) {
+    #if !os(macOS)
     if disableIdleTimer {
         UIApplication.shared.isIdleTimerDisabled = true
     } else {
         UIApplication.shared.isIdleTimerDisabled = false
     }
+    #endif
 }

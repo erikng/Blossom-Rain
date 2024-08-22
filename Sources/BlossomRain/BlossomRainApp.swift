@@ -60,16 +60,16 @@ public extension BlossomRainApp {
     var body: some Scene {
         WindowGroup {
             RootView()
+            #if targetEnvironment(macCatalyst)
                 .onReceive(NotificationCenter.default.publisher(for: UIScene.willConnectNotification)) { _ in
-#if targetEnvironment(macCatalyst)
                     // prevent window in macOS from being resized down
                     UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
                         windowScene.sizeRestrictions?.minimumSize = CGSize(width: 800, height: 1000)
                         windowScene.sizeRestrictions?.maximumSize = CGSize(width: 800, height: 1000)
                         windowScene.sizeRestrictions?.allowsFullScreen = false
                     }
-#endif
                 }
+            #endif
         }
     }
 }

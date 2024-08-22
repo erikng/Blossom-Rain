@@ -40,7 +40,10 @@ struct RecipesTab: View {
                             TextField(text: $brState.unitVolumeString) {
                                 Text(brState.unitText)
                             }
+                            #if !os(macOS)
                             .keyboardType(.numberPad)
+                            #endif
+                            
                             #if !SKIP
                             .focused($keyboardIsFocused)
                             .toolbar {
@@ -180,7 +183,9 @@ struct RecipesTab: View {
                 }
             }
             .navigationTitle("Recipes")
+            #if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Label(title: { Text("Recipes") }, icon: { Image("waterbottle-skip", bundle: .module) })

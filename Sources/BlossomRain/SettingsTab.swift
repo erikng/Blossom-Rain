@@ -130,7 +130,9 @@ struct SettingsTab: View {
                 } footer: {}
             }
             .navigationTitle("Settings")
+            #if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Label(title: { Text("Settings") }, icon: { Image("slider.horizontal.3-skip", bundle: .module) })
