@@ -85,20 +85,6 @@ struct SettingsTab: View {
                     Text("Lotus Water ships with two types of droppers: \n•Round Tipped\n•Straight Tipped\n\nIf your bottle has a **rounded tip**, please select it above to ensure the recipe is accurate.")
                         .font(.footnote)
                         .foregroundColor(.secondary)
-                    //                VStack(alignment: .leading, spacing: 5) {
-                    //                    Text("Lotus Water ships with two types of droppers:")
-                    //                    Text("• Round Tipped")
-                    //                    Text("• Straight Tipped")
-                    //                        .padding(.bottom)
-                    //
-                    //                    VStack(alignment: .leading, spacing: 0) {
-                    //                            Text("If your bottle has a")
-                    //                            Text(" rounded tip")
-                    //                                .fontWeight(.bold)
-                    //                            Text(", please select it above to ensure the recipe is accurate.")
-                    //                    }
-                    //                }
-                    //                .font(.footnote)
                 }
                 
                 // The LCP Team
