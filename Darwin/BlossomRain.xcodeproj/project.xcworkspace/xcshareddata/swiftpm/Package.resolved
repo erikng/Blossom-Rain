@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://source.skip.tools/skip.git",
       "state" : {
-        "revision" : "aa2f0352a291a3a4884c510c2a6985e1fdf5904d",
-        "version" : "1.0.4"
+        "revision" : "e3f722455a2c147eb91290d9948c85950eaf4b35",
+        "version" : "1.6.1"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://source.skip.tools/skip-foundation.git",
       "state" : {
-        "revision" : "e50ff62398eab723d79f5cd33f5db71f17b239a0",
-        "version" : "1.1.0"
+        "revision" : "965c353270571ae78eeb2acdc641bb19b0a2c861",
+        "version" : "1.3.7"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://source.skip.tools/skip-lib.git",
       "state" : {
-        "revision" : "dc7cf3abd6da8c8813f41cf183449925e2207a04",
-        "version" : "1.1.0"
+        "revision" : "30c97059e731f1b42a5ea1ead50b9e03fef3a7a4",
+        "version" : "1.3.7"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://source.skip.tools/skip-model.git",
       "state" : {
-        "revision" : "95b841e091bd51a503cbebd7ddc84397963ba2c0",
-        "version" : "1.1.0"
+        "revision" : "1a90655e5296e8524f9e76074b198a525c5e216b",
+        "version" : "1.5.0"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://source.skip.tools/skip-ui.git",
       "state" : {
-        "revision" : "a5331803424adac10ee2a7a7b6f643c57871b532",
-        "version" : "1.4.1"
+        "revision" : "ac41dce365b49dbf17a16b771e6895649e2db6e4",
+        "version" : "1.33.0"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://source.skip.tools/skip-unit.git",
       "state" : {
-        "revision" : "9b89430807453d40793f3784d55aa1bc62c21c4d",
-        "version" : "1.0.0"
+        "revision" : "0ed0649a680186b227e5ee14fd2f32ce2c8a1879",
+        "version" : "1.2.1"
       }
     }
   ],

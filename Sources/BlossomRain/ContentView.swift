@@ -9,11 +9,11 @@ import SwiftUI
 
 public struct ContentView: View {
     @EnvironmentObject var brState: BRState
-    @AppStorage("disableIdleTimer") var disableIdleTimer: Bool = false
-    @AppStorage("roundTippedDropperCalcium") var roundTippedDropperCalcium: Bool = false
-    @AppStorage("roundTippedDropperMagnesium") var roundTippedDropperMagnesium: Bool = false
-    @AppStorage("roundTippedDropperPotassium") var roundTippedDropperPotassium: Bool = false
-    @AppStorage("roundTippedDropperSodium") var roundTippedDropperSodium: Bool = false
+    @AppStorage("disableIdleTimer") var disableIdleTimer: Bool = true
+    @AppStorage("roundTippedDropperCalcium") var roundTippedDropperCalcium: Bool = true
+    @AppStorage("roundTippedDropperMagnesium") var roundTippedDropperMagnesium: Bool = true
+    @AppStorage("roundTippedDropperPotassium") var roundTippedDropperPotassium: Bool = true
+    @AppStorage("roundTippedDropperSodium") var roundTippedDropperSodium: Bool = true
     
     public init() {
     }
