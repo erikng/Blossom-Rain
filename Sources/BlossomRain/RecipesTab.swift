@@ -64,30 +64,22 @@ struct RecipesTab: View {
                         HStack {
                             let max = brState.unit.selectedUnit.maxStep
                             let stepSize = brState.unit == .milliliter ? volumeInputStepper : brState.unit.selectedUnit.initialStep
-                            if [1.0, 5.0, 10.0].contains(volumeInputStepper) && brState.unit == .milliliter {
-                                Slider(
-                                    value: Binding<Double>(
-                                        get: { brState.unitVolume },
-                                        set: { newValue in
-                                            let rounded = (newValue / stepSize).rounded() * stepSize
-                                            brState.unitVolume = rounded
-                                        }
-                                    ),
-                                    in: 0...max
-                                )
+                            let shouldOmitStep = brState.unit == .milliliter && [1.0, 5.0, 10.0].contains(volumeInputStepper)
+
+                            let binding = Binding<Double>(
+                                get: { brState.unitVolume },
+                                set: { newValue in
+                                    let rounded = (newValue / stepSize).rounded() * stepSize
+                                    brState.unitVolume = rounded
+                                }
+                            )
+
+                            if shouldOmitStep {
+                                Slider(value: binding, in: 0...max)
                             } else {
-                                Slider(
-                                    value: Binding<Double>(
-                                        get: { brState.unitVolume },
-                                        set: { newValue in
-                                            let rounded = (newValue / stepSize).rounded() * stepSize
-                                            brState.unitVolume = rounded
-                                        }
-                                    ),
-                                    in: 0...max,
-                                    step: stepSize
-                                )
+                                Slider(value: binding, in: 0...max, step: stepSize)
                             }
+
                             // Display as Int if steps are whole numbers, else with decimal precision
                             if stepSize.truncatingRemainder(dividingBy: 1.0) == 0 {
                                 Text("\(Int(brState.unitVolume))")
