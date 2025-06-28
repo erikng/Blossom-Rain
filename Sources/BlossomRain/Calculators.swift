@@ -62,13 +62,13 @@ func calculateMultipliers(roundTippedDropperCalcium: Bool, roundTippedDropperMag
     mainBRState.sodiumDropperTypeMultiplier = roundTippedDropperSodium ? 1.0 : 0.56
 }
 
-func updatePartsPerMillionValues() {
-    mainBRState.calciumPartsPerMillion = mainBRState.recipe.selectedRecipe.calciumPartsPerMillion
-    mainBRState.magnesiumPartsPerMillion = mainBRState.recipe.selectedRecipe.magnesiumPartsPerMillion
-    mainBRState.potassiumPartsPerMillion = mainBRState.recipe.selectedRecipe.potassiumPartsPerMillion
-    mainBRState.sodiumPartsPerMillion = mainBRState.recipe.selectedRecipe.sodiumPartsPerMillion
+func updatePartsPerMillionValues(selectedRecipe: Recipes) {
+    mainBRState.calciumPartsPerMillion = selectedRecipe.selectedRecipe.calciumPartsPerMillion
+    mainBRState.magnesiumPartsPerMillion = selectedRecipe.selectedRecipe.magnesiumPartsPerMillion
+    mainBRState.potassiumPartsPerMillion = selectedRecipe.selectedRecipe.potassiumPartsPerMillion
+    mainBRState.sodiumPartsPerMillion = selectedRecipe.selectedRecipe.sodiumPartsPerMillion
 }
 
-func updateDescription() {
-    mainBRState.recipeDescription = mainBRState.recipe.selectedRecipe.description
+func updateDescription(selectedRecipe: Recipes) {
+    mainBRState.recipeDescription = selectedRecipe.selectedRecipe.description
 }

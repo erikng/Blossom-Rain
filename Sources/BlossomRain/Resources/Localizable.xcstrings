@@ -73,6 +73,15 @@
         }
       }
     },
+    "Default Recipe" : {
+
+    },
+    "Default Unit" : {
+
+    },
+    "Defaults" : {
+
+    },
     "Disable Screen Sleep" : {
 
     },
@@ -373,6 +382,12 @@
       }
     },
     "The amount of steps the **milliliter** slider will increase or decrease by." : {
+
+    },
+    "The recipe when you start the app from deep sleep." : {
+
+    },
+    "The unit when you start the app from deep sleep." : {
 
     },
     "Unit" : {

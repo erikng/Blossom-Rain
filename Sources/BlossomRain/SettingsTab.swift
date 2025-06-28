@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SettingsTab: View {
     @EnvironmentObject var brState: BRState
+    @AppStorage("defaultRecipe") var defaultRecipe: Recipes = .light_and_bright
+    @AppStorage("defaultUnit") var defaultUnit: Units = .milliliter
     @AppStorage("disableIdleTimer") var disableIdleTimer: Bool = true
     @AppStorage("roundTippedDropperCalcium") var roundTippedDropperCalcium: Bool = true
     @AppStorage("roundTippedDropperMagnesium") var roundTippedDropperMagnesium: Bool = true
@@ -86,6 +88,38 @@ struct SettingsTab: View {
                         .font(.footnote)
                         .foregroundColor(.secondary)
                 }
+
+                // Defaults
+                Section {
+                    VStack(alignment: .leading) {
+                        Text("Default Unit")
+                        Text("The unit when you start the app from deep sleep.")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                        Picker("Unit", selection: $defaultUnit) {
+                            ForEach(Units.allCases) { unit in
+                                Text(unit.selectedUnit.name)
+                                    .tag(unit)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                    }
+
+                    VStack(alignment: .leading) {
+                        Text("Default Recipe")
+                        Text("The recipe when you start the app from deep sleep.")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                        Picker("Recipes", selection: $defaultRecipe) {
+                            ForEach(Recipes.allCases) { recipe in
+                                Text(recipe.selectedRecipe.name)
+                                    .tag(recipe)
+                            }
+                        }
+                    }
+                } header: {
+                    Text("Defaults")
+                } footer: {}
                 
                 // The LCP Team
                 Section {
@@ -112,7 +146,14 @@ struct SettingsTab: View {
             updateScreenIdleTimer(disableIdleTimer: disableIdleTimer)
         }
         .onChange(of: useManualVolumeInput) {
-            updateUnits()
+            updateUnits(selectedUnit: defaultUnit)
+        }
+        .onChange(of: defaultUnit) {
+            updateUnits(selectedUnit: defaultUnit)
+        }
+        .onChange(of: defaultRecipe) {
+            updatePartsPerMillionValues(selectedRecipe: defaultRecipe)
+            updateDescription(selectedRecipe: defaultRecipe)
         }
         .onChange(of: roundTippedDropperCalcium) {
             calculateMultipliers(roundTippedDropperCalcium: roundTippedDropperCalcium, roundTippedDropperMagnesium: roundTippedDropperMagnesium, roundTippedDropperPotassium: roundTippedDropperPotassium, roundTippedDropperSodium: roundTippedDropperSodium)

@@ -52,8 +52,8 @@ extension Units {
     }
 }
 
-func updateUnits() {
-    mainBRState.unitText = mainBRState.unit.selectedUnit.iOSText
-    mainBRState.unitVolume = mainBRState.unit.selectedUnit.initialVolume
-    mainBRState.unitVolumeString = String(Int(mainBRState.unit.selectedUnit.initialVolume))
+func updateUnits(selectedUnit: Units) {
+    mainBRState.unitText = selectedUnit.selectedUnit.iOSText
+    mainBRState.unitVolume = selectedUnit.selectedUnit.initialVolume
+    mainBRState.unitVolumeString = String(Int(selectedUnit.selectedUnit.initialVolume))
 }

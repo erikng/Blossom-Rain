@@ -9,6 +9,8 @@ import SwiftUI
 
 public struct ContentView: View {
     @EnvironmentObject var brState: BRState
+    @AppStorage("defaultRecipe") var defaultRecipe: Recipes = .light_and_bright
+    @AppStorage("defaultUnit") var defaultUnit: Units = .milliliter
     @AppStorage("disableIdleTimer") var disableIdleTimer: Bool = true
     @AppStorage("roundTippedDropperCalcium") var roundTippedDropperCalcium: Bool = true
     @AppStorage("roundTippedDropperMagnesium") var roundTippedDropperMagnesium: Bool = true
@@ -30,10 +32,12 @@ public struct ContentView: View {
                 }
         }
         .onAppear {
-            updatePartsPerMillionValues()
-            updateDescription()
+            brState.recipe = defaultRecipe
+            brState.unit = defaultUnit
+            updatePartsPerMillionValues(selectedRecipe: defaultRecipe)
+            updateDescription(selectedRecipe: defaultRecipe)
             updateScreenIdleTimer(disableIdleTimer: disableIdleTimer)
-            updateUnits()
+            updateUnits(selectedUnit: defaultUnit)
             calculateMultipliers(roundTippedDropperCalcium: roundTippedDropperCalcium, roundTippedDropperMagnesium: roundTippedDropperMagnesium, roundTippedDropperPotassium: roundTippedDropperPotassium, roundTippedDropperSodium: roundTippedDropperSodium)
         }
     }

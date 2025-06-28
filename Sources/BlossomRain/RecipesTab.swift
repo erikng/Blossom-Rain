@@ -9,6 +9,8 @@ import SwiftUI
 
 struct RecipesTab: View {
     @EnvironmentObject var brState: BRState
+    @AppStorage("defaultRecipe") var defaultRecipe: Recipes = .light_and_bright
+    @AppStorage("defaultUnit") var defaultUnit: Units = .milliliter
     @AppStorage("useManualVolumeInput") var useManualVolumeInput: Bool = false
     @AppStorage("volumeInputStepper") var volumeInputStepper: Double = 25.0
     #if !SKIP
@@ -205,11 +207,11 @@ struct RecipesTab: View {
             brState.unitVolume = Double(brState.unitVolumeString) ?? 0.0
         }
         .onChange(of: brState.recipe) {
-            updatePartsPerMillionValues()
-            updateDescription()
+            updatePartsPerMillionValues(selectedRecipe: brState.recipe)
+            updateDescription(selectedRecipe: brState.recipe)
         }
         .onChange(of: brState.unit) {
-            updateUnits()
+            updateUnits(selectedUnit: brState.unit)
         }
     }
 
