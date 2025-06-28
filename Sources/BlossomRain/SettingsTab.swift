@@ -149,9 +149,11 @@ struct SettingsTab: View {
             updateUnits(selectedUnit: defaultUnit)
         }
         .onChange(of: defaultUnit) {
+            brState.unit = defaultUnit
             updateUnits(selectedUnit: defaultUnit)
         }
         .onChange(of: defaultRecipe) {
+            brState.recipe = defaultRecipe
             updatePartsPerMillionValues(selectedRecipe: defaultRecipe)
             updateDescription(selectedRecipe: defaultRecipe)
         }
