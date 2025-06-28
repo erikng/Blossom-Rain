@@ -64,19 +64,19 @@ struct RecipesTab: View {
                         }
                     } else {
                         HStack {
-                            if brState.unit == .milliliter {
-                                Slider(
-                                    value: $brState.unitVolume,
-                                    in: 0.0...brState.unit.selectedUnit.maxStep,
-                                    step: volumeInputStepper
-                                )
-                            } else {
-                                Slider(
-                                    value: $brState.unitVolume,
-                                    in: 0.0...brState.unit.selectedUnit.maxStep,
-                                    step: brState.unit.selectedUnit.initialStep
-                                )
-                            }
+                            let max = brState.unit.selectedUnit.maxStep
+                            let stepSize = brState.unit == .milliliter ? volumeInputStepper : brState.unit.selectedUnit.initialStep
+                            Slider(
+                                value: Binding<Double>(
+                                    get: { brState.unitVolume },
+                                    set: { newValue in
+                                        let rounded = (newValue / stepSize).rounded() * stepSize
+                                        brState.unitVolume = rounded
+                                    }
+                                ),
+                                in: 0.0...max,
+                                step: stepSize
+                            )
                             Text(String(Int(brState.unitVolume)))
                         }
                     }
