@@ -77,7 +77,12 @@ struct RecipesTab: View {
                                 in: 0.0...max,
                                 step: stepSize
                             )
-                            Text(String(Int(brState.unitVolume)))
+                            // Display as Int if steps are whole numbers, else with decimal precision
+                            if stepSize.truncatingRemainder(dividingBy: 1.0) == 0 {
+                                Text("\(Int(brState.unitVolume))")
+                            } else {
+                                Text(String(format: "%.2f", brState.unitVolume))
+                            }
                         }
                     }
                 } header: {
