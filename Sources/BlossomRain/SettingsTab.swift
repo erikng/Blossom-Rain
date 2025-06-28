@@ -9,11 +9,11 @@ import SwiftUI
 
 struct SettingsTab: View {
     @EnvironmentObject var brState: BRState
-    @AppStorage("disableIdleTimer") var disableIdleTimer: Bool = false
-    @AppStorage("roundTippedDropperCalcium") var roundTippedDropperCalcium: Bool = false
-    @AppStorage("roundTippedDropperMagnesium") var roundTippedDropperMagnesium: Bool = false
-    @AppStorage("roundTippedDropperPotassium") var roundTippedDropperPotassium: Bool = false
-    @AppStorage("roundTippedDropperSodium") var roundTippedDropperSodium: Bool = false
+    @AppStorage("disableIdleTimer") var disableIdleTimer: Bool = true
+    @AppStorage("roundTippedDropperCalcium") var roundTippedDropperCalcium: Bool = true
+    @AppStorage("roundTippedDropperMagnesium") var roundTippedDropperMagnesium: Bool = true
+    @AppStorage("roundTippedDropperPotassium") var roundTippedDropperPotassium: Bool = true
+    @AppStorage("roundTippedDropperSodium") var roundTippedDropperSodium: Bool = true
     @AppStorage("useManualVolumeInput") var useManualVolumeInput: Bool = false
     @AppStorage("volumeInputStepper") var volumeInputStepper: Double = 25.0
     var volumeInputSteppers = [1.0, 5.0, 10.0, 20.0, 25.0]
