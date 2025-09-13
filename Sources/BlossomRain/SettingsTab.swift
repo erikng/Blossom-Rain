@@ -146,7 +146,13 @@ struct SettingsTab: View {
             updateScreenIdleTimer(disableIdleTimer: disableIdleTimer)
         }
         .onChange(of: useManualVolumeInput) {
-            updateUnits(selectedUnit: defaultUnit)
+            if useManualVolumeInput {
+                updateUnits(selectedUnit: brState.unit)
+                brState.unitVolume = 0.0
+                brState.unitVolumeString = ""
+            } else {
+                updateUnits(selectedUnit: defaultUnit)
+            }
         }
         .onChange(of: defaultUnit) {
             brState.unit = defaultUnit

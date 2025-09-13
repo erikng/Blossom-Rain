@@ -37,7 +37,7 @@ public struct ContentView: View {
             updatePartsPerMillionValues(selectedRecipe: defaultRecipe)
             updateDescription(selectedRecipe: defaultRecipe)
             updateScreenIdleTimer(disableIdleTimer: disableIdleTimer)
-            updateUnits(selectedUnit: defaultUnit)
+            updateUnits(selectedUnit: brState.unit)
             calculateMultipliers(roundTippedDropperCalcium: roundTippedDropperCalcium, roundTippedDropperMagnesium: roundTippedDropperMagnesium, roundTippedDropperPotassium: roundTippedDropperPotassium, roundTippedDropperSodium: roundTippedDropperSodium)
         }
     }
