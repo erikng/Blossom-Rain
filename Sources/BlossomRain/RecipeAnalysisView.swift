@@ -23,7 +23,11 @@ struct RecipeAnalysisView: View {
             .chartXAxis { AxisMarks(values: .stride(by: 20)) }
             .chartYAxis { AxisMarks(position: .leading, values: .stride(by: 20)) }
             .chartXAxisLabel("Alkalinity (ppm as CaCO₃)")
-            .chartYAxisLabel("Hardness (ppm as CaCO₃)")
+            .chartYAxisLabel(position: .leading, alignment: .center) {
+                // Charts rotates leading labels clockwise; reverse only the title to read upward.
+                Text("Hardness (ppm as CaCO₃)")
+                    .rotationEffect(.degrees(180))
+            }
             .frame(height: 240)
             .padding(.vertical, 8)
             .accessibilityIdentifier("waterProfileChart")

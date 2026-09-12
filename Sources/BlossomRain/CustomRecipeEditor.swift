@@ -6,11 +6,6 @@ struct CustomRecipeEditor: View {
 
     var body: some View {
         Section {
-            TextField("Recipe name", text: $library.draft.name)
-                .focused($focusedField, equals: .name)
-                .submitLabel(.done)
-                .accessibilityIdentifier("customRecipeName")
-
             ForEach(RecipeMineral.allCases) { mineral in
                 VStack(alignment: .leading) {
                     HStack {
@@ -42,11 +37,10 @@ struct CustomRecipeEditor: View {
                     }
                 }
             }
-
         } header: {
             Text(library.editingRecipeID == nil ? "Custom Recipe" : "Edit Custom Recipe")
         } footer: {
-            Text("Mineral targets are in ppm as CaCO₃. Name your recipe to save it on this device.")
+            Text("Mineral targets are in ppm as CaCO₃.")
         }
     }
 }

@@ -18,6 +18,43 @@ struct RecipeFeatureChecks {
               simpleAndSweetEspresso.description == simpleAndSweet.description,
               "Simple & Sweet Espresso must retain its parent description and creator credit")
 
+        var describedRecipe = lightAndBright
+        describedRecipe.name = "Morning coffee"
+        describedRecipe.description = "Washed coffee — bright and balanced.\nTry a longer bloom."
+        let describedDraft = CustomRecipeDraft(recipe: describedRecipe)
+        check(describedDraft.recipe?.description == describedRecipe.description,
+              "Opening a custom recipe for editing must preserve its description")
+        let descriptionSuite = "BlossomRain.DescriptionChecks.\(UUID().uuidString)"
+        let descriptionDefaults = UserDefaults(suiteName: descriptionSuite)!
+        defer { descriptionDefaults.removePersistentDomain(forName: descriptionSuite) }
+        let descriptionLibrary = RecipeLibrary(defaults: descriptionDefaults)
+        descriptionLibrary.select(RecipeLibrary.customSelectionID)
+        descriptionLibrary.draft = describedDraft
+        try descriptionLibrary.saveDraft()
+        descriptionLibrary.setDefault(descriptionLibrary.selectedID)
+        let reloadedDescription = RecipeLibrary(defaults: UserDefaults(suiteName: descriptionSuite)!)
+        check(reloadedDescription.currentRecipe?.description == describedRecipe.description,
+              "A custom description must survive saving and reloading")
+        reloadedDescription.editSelectedRecipe()
+        reloadedDescription.draft.description = "Unsaved notes"
+        check(reloadedDescription.currentRecipe?.description == "Unsaved notes",
+              "Description edits must appear in the draft")
+        check(RecipeLibrary(defaults: descriptionDefaults).currentRecipe?.description == describedRecipe.description,
+              "Unsaved description edits must not change the stored recipe")
+        reloadedDescription.cancelEditing()
+        check(reloadedDescription.currentRecipe?.description == describedRecipe.description,
+              "Cancelling must restore the saved description")
+        reloadedDescription.editSelectedRecipe()
+        reloadedDescription.draft.description = "Updated notes\nKeep the same recipe identity."
+        try reloadedDescription.saveDraft()
+        check(RecipeLibrary(defaults: descriptionDefaults).currentRecipe?.description == reloadedDescription.draft.description,
+              "Updated descriptions must survive reloading")
+        reloadedDescription.editSelectedRecipe()
+        reloadedDescription.draft.description = ""
+        try reloadedDescription.saveDraft()
+        check(RecipeLibrary(defaults: descriptionDefaults).currentRecipe?.description == "",
+              "Descriptions must remain optional")
+
         var sliderDraft = CustomRecipeDraft()
         let sliderSamples: [(input: Double, expected: Double)] = [
             (83.2507610, 83), (78.4818202, 78), (40.5, 41),

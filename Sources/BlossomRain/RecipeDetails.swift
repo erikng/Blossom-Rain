@@ -48,11 +48,13 @@ extension Recipe {
 struct CustomRecipeDraft {
     var id: UUID
     var name: String
+    var description: String
     private var values: [RecipeMineral: String]
 
     init(recipe: Recipe? = nil) {
         id = recipe?.id ?? UUID()
         name = recipe?.name ?? ""
+        description = recipe?.description ?? ""
         // These are the website's custom editor defaults, not its zero-valued option.
         let targets: [RecipeMineral: Double] = [
             .calcium: recipe?.calciumPartsPerMillion ?? 60,
@@ -95,7 +97,7 @@ struct CustomRecipeDraft {
         }
         let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
         return Recipe(id: id, name: trimmedName.isEmpty ? "Custom Recipe" : trimmedName,
-                      description: "Your custom Lotus Water recipe.",
+                      description: description,
                       calciumPartsPerMillion: calcium, magnesiumPartsPerMillion: magnesium,
                       potassiumPartsPerMillion: potassium, sodiumPartsPerMillion: sodium)
     }

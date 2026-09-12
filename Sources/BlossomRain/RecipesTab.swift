@@ -9,6 +9,7 @@ import SwiftUI
 
 enum RecipeInputField: Hashable {
     case name
+    case description
     case mineral(RecipeMineral)
     case volume
 }
@@ -35,14 +36,6 @@ struct RecipesTab: View {
                         RecipePickerOptions()
                     }
                     .accessibilityIdentifier("recipePicker")
-                    if let saved = library.selectedSavedRecipe {
-                        HStack {
-                            Button("Edit Recipe") { library.editSelectedRecipe() }
-                            Spacer()
-                            Button("Delete Recipe", role: .destructive) { recipeToDelete = saved }
-                        }
-                        .buttonStyle(.borderless)
-                    }
                 }
 
                 if let message = library.loadError {
@@ -190,10 +183,28 @@ struct RecipesTab: View {
                 } footer: {}
 
                 RecipeAnalysisView(recipe: recipe)
+                }
 
+                // Keep naming and notes beside the final actions, even with invalid mineral input.
                 Section {
-                    HStack {
-                        if !recipe.description.isEmpty {
+                    if library.selectedID == RecipeLibrary.customSelectionID {
+                        TextField("Recipe name", text: $library.draft.name)
+                            .focused($focusedField, equals: .name)
+                            .submitLabel(.next)
+                            .accessibilityIdentifier("customRecipeName")
+
+                        TextField("Recipe description (optional)", text: $library.draft.description, axis: .vertical)
+                            .lineLimit(3...6)
+                            .focused($focusedField, equals: .description)
+                            .submitLabel(.return)
+                            .submitScope()
+                            .accessibilityIdentifier("customRecipeDescription")
+                    } else if let recipe = library.currentRecipe, !recipe.description.isEmpty {
+                        if library.selectedSavedRecipe != nil {
+                            Text(verbatim: recipe.description)
+                                .font(.footnote)
+                                .foregroundColor(.secondary)
+                        } else {
                             Text(LocalizedStringKey(recipe.description))
                                 .font(.footnote)
                                 .foregroundColor(.secondary)
@@ -202,11 +213,14 @@ struct RecipesTab: View {
                 } header: {
                     Text("Recipe Information")
                 } footer: {
-                    Text("Purchase these drops at [Lotus Coffee Products](https://lotuscoffeeproducts.com/collections/all)")
-                        .font(.footnote)
-                        .foregroundColor(.secondary)
-                        .padding(.top)
-                }
+                    if library.selectedID == RecipeLibrary.customSelectionID {
+                        Text("Name your recipe to save it on this device.")
+                    } else {
+                        Text("Purchase these drops at [Lotus Coffee Products](https://lotuscoffeeproducts.com/collections/all)")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                            .padding(.top)
+                    }
                 }
 
                 // Keep actions last, including when invalid input hides the recipe preview.
@@ -238,11 +252,45 @@ struct RecipesTab: View {
             }
             .navigationTitle("Recipes")
             .navigationBarTitleDisplayMode(.inline)
-            .onSubmit { saveCustomRecipe() }
+            .onSubmit {
+                if focusedField == .name {
+                    focusedField = .description
+                } else if focusedField != .description {
+                    saveCustomRecipe()
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Label("Recipes", systemImage: "waterbottle")
-                        .foregroundColor(.secondary)
+                    if let saved = library.selectedSavedRecipe {
+                        Menu {
+                            Button {
+                                focusedField = nil
+                                library.editSelectedRecipe()
+                            } label: {
+                                Label("Edit Recipe", systemImage: "pencil")
+                            }
+
+                            Button(role: .destructive) {
+                                focusedField = nil
+                                recipeToDelete = saved
+                            } label: {
+                                Label("Delete Recipe", systemImage: "trash")
+                            }
+                        } label: {
+                            HStack {
+                                Label("Recipes", systemImage: "waterbottle")
+                                    .foregroundColor(.secondary)
+                                Divider()
+                                Label("Recipe Actions", systemImage: "square.and.pencil")
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        .accessibilityHint("Edit or delete this saved recipe.")
+                        .accessibilityIdentifier("savedRecipeActions")
+                    } else {
+                        Label("Recipes", systemImage: "waterbottle")
+                            .foregroundColor(.secondary)
+                    }
                 }
                 // Own the keyboard toolbar here once; Section rows can duplicate it.
                 if focusedField != nil {
