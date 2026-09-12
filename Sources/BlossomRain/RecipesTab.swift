@@ -7,13 +7,19 @@
 
 import SwiftUI
 
+enum RecipeInputField: Hashable {
+    case name
+    case mineral(RecipeMineral)
+    case volume
+}
+
 struct RecipesTab: View {
     @EnvironmentObject var brState: BRState
     @EnvironmentObject private var library: RecipeLibrary
     @AppStorage("defaultUnit") var defaultUnit: Units = .milliliter
     @AppStorage("useManualVolumeInput") var useManualVolumeInput: Bool = false
     @AppStorage("volumeInputStepper") var volumeInputStepper: Double = 25.0
-    @FocusState private var keyboardIsFocused: Bool
+    @FocusState private var focusedField: RecipeInputField?
     @State private var recipeToDelete: Recipe?
     @State private var errorMessage: String?
     
@@ -42,7 +48,7 @@ struct RecipesTab: View {
                     Section { Text(message).foregroundStyle(.red) }
                 }
                 if library.selectedID == RecipeLibrary.customSelectionID {
-                    CustomRecipeEditor()
+                    CustomRecipeEditor(focusedField: $focusedField)
                 }
 
                 Section {
@@ -59,19 +65,7 @@ struct RecipesTab: View {
                                 Text(brState.unitText)
                             }
                             .keyboardType(.numberPad)
-                            .focused($keyboardIsFocused)
-                            .toolbar {
-                                ToolbarItem(placement: .keyboard) {
-                                    HStack {
-                                        Spacer()
-                                        Button("Close", systemImage: "checkmark.circle.fill", action: {
-                                            keyboardIsFocused = false
-                                        })
-                                        .buttonStyle(.borderedProminent)
-                                        .tint(.green)
-                                    }
-                                }
-                            }
+                            .focused($focusedField, equals: .volume)
                         }
                     } else {
                         HStack {
@@ -221,6 +215,14 @@ struct RecipesTab: View {
                     Label("Recipes", systemImage: "waterbottle")
                         .foregroundColor(.secondary)
                 }
+                // Own the keyboard toolbar here once; Section rows can duplicate it.
+                if focusedField != nil {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        Button("Done") { focusedField = nil }
+                            .accessibilityIdentifier("dismissRecipeKeyboard")
+                    }
+                }
             }
         }
         .confirmationDialog("Delete \(recipeToDelete?.name ?? "recipe")?", isPresented: Binding(
@@ -243,9 +245,9 @@ struct RecipesTab: View {
             Text(errorMessage ?? "")
         }
         .scrollDismissesKeyboard(.immediately)
-        .onTapGesture(count: keyboardIsFocused ? 1 : .max, perform: {
-            // if keyboard shown use single tap to close it, otherwise set .max to not interfere with other swiftui elements
-            keyboardIsFocused = false
+        .onTapGesture(count: focusedField == .volume ? 1 : .max, perform: {
+            // Preserve tap-to-dismiss for manual volume input without intercepting editor controls.
+            focusedField = nil
         })
         .onChange(of: brState.unitVolumeString) {
             brState.unitVolume = Double(brState.unitVolumeString) ?? 0.0

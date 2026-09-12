@@ -2,13 +2,13 @@ import SwiftUI
 
 struct CustomRecipeEditor: View {
     @EnvironmentObject private var library: RecipeLibrary
-    @FocusState private var focusedField: String?
+    @FocusState.Binding var focusedField: RecipeInputField?
     @State private var errorMessage: String?
 
     var body: some View {
         Section {
             TextField("Recipe name", text: $library.draft.name)
-                .focused($focusedField, equals: "name")
+                .focused($focusedField, equals: .name)
                 .submitLabel(.done)
                 .onSubmit { focusedField = nil }
                 .accessibilityIdentifier("customRecipeName")
@@ -25,7 +25,7 @@ struct CustomRecipeEditor: View {
                         .keyboardType(.decimalPad)
                         .multilineTextAlignment(.trailing)
                         .frame(minWidth: 60, maxWidth: 110)
-                        .focused($focusedField, equals: mineral.rawValue)
+                        .focused($focusedField, equals: .mineral(mineral))
                         .accessibilityLabel("\(mineral.name) target in ppm")
                         .accessibilityIdentifier("custom-\(mineral.rawValue)")
                         Text("ppm").foregroundStyle(.secondary)
@@ -64,14 +64,6 @@ struct CustomRecipeEditor: View {
             Text(library.editingRecipeID == nil ? "Custom Recipe" : "Edit Custom Recipe")
         } footer: {
             Text("Mineral targets are in ppm as CaCO₃. Name your recipe to save it on this device.")
-        }
-        .toolbar {
-            if focusedField != nil {
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-                    Button("Done") { focusedField = nil }
-                }
-            }
         }
         .alert("Could Not Save Recipe", isPresented: Binding(
             get: { errorMessage != nil },
