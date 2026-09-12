@@ -302,12 +302,12 @@ struct RecipesTab: View {
                 }
             }
         }
-        .confirmationDialog("Delete \(recipeToDelete?.name ?? "recipe")?", isPresented: Binding(
+        .alert("Delete \(recipeToDelete?.name ?? "recipe")?", isPresented: Binding(
             get: { recipeToDelete != nil },
             set: { if !$0 { recipeToDelete = nil } }
-        ), titleVisibility: .visible) {
+        ), presenting: recipeToDelete) { recipe in
+            Button("Cancel", role: .cancel) { recipeToDelete = nil }
             Button("Delete Recipe", role: .destructive) {
-                guard let recipe = recipeToDelete else { return }
                 do { try library.deleteRecipe(recipe.id) }
                 catch {
                     errorTitle = "Could Not Delete Recipe"
