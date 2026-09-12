@@ -10,3 +10,4 @@ DerivedData/
 *.jks
 keystore.properties
 Darwin/fastlane/apikey.json
+product-instructions.html
