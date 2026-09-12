@@ -1,0 +1,98 @@
+{
+  "sourceURL": "https://lotuscoffeeproducts.com/pages/product-instructions",
+  "retrievedOn": "2026-09-12",
+  "sourceSHA256": "d169bd334b65025f5ad89e9753c41cc39569a7db5bf507e65beaa39252e9fe37",
+  "ppmOrder": [
+    "calcium",
+    "magnesium",
+    "potassium",
+    "sodium"
+  ],
+  "ppmBasis": "ppm as CaCO3, as used by the Lotus calculator",
+  "recipes": [
+    {
+      "rawValue": "light_and_bright",
+      "name": "Light and Bright",
+      "description": "Developed by the incredibly talented Lance Hedrick, Light and Bright was created with one goal in mind: To find a water recipe that highlights the acidity in coffee while also maintaining a high degree of flavor clarity. After hours of cupping different recipes, a clear winner stood out amongst the rest. This recipe is best used with lightly roasted coffee when a bright and flavorful cup is desired.",
+      "descriptionHTML": "<p>Developed by the incredibly talented Lance Hedrick, Light and Bright was created with one goal in mind: To find a water recipe that highlights the acidity in coffee while also maintaining a high degree of flavor clarity. After hours of cupping different recipes, a clear winner stood out amongst the rest. This recipe is best used with lightly roasted coffee when a bright and flavorful cup is desired. </p>",
+      "ppm": [
+        60.0,
+        0.0,
+        25.0,
+        0.0
+      ]
+    },
+    {
+      "rawValue": "simple_and_sweet",
+      "name": "Simple and Sweet",
+      "description": "Crafted by the wonderfully talented Lance Hedrick, Simple and Sweet was designed to help your brew a smooth and balanced cup suitable for any style of coffee. All four ingredients are used for this recipe with the goal being to bring out the best each mineral has to offer. If this is your first time using Lotus Water or if you simply don’t know what water to use for a new coffee this is a great place to start.",
+      "descriptionHTML": "<p>Crafted by the wonderfully talented Lance Hedrick, Simple and Sweet was designed to help your brew a smooth and balanced cup suitable for any style of coffee. All four ingredients are used for this recipe with the goal being to bring out the best each mineral has to offer. If this is your first time using Lotus Water or if you simply don’t know what water to use for a new coffee this is a great place to start. </p>",
+      "ppm": [
+        60.0,
+        30.0,
+        15.0,
+        25.0
+      ]
+    },
+    {
+      "rawValue": "light_and_bright_espresso",
+      "name": "Light and Bright (espresso)",
+      "description": "",
+      "descriptionHTML": "",
+      "ppm": [
+        0.0,
+        20.0,
+        45.0,
+        0.0
+      ]
+    },
+    {
+      "rawValue": "simple_and_sweet_espresso",
+      "name": "Simple and Sweet (espresso)",
+      "description": "",
+      "descriptionHTML": "",
+      "ppm": [
+        0.0,
+        20.0,
+        0.0,
+        55.0
+      ]
+    },
+    {
+      "rawValue": "bright_and_juicy",
+      "name": "Bright and Juicy",
+      "description": "Developed by Mike Bawden founder of Curious Coffee, Bright and Juicy gives a bright and balanced cup with a juicy mouthfeel. This is an approachable recipe and works well on a variety of coffees and brewers, but particularly shines with light to medium-light roasted washed coffees.",
+      "descriptionHTML": "<p>Developed by Mike Bawden founder of <a href=\"https://www.curious-coffee.com/\" target=\"_blank\" title=\"https://www.curious-coffee.com/\"><strong>Curious Coffee</strong></a>, Bright and Juicy gives a bright and balanced cup with a juicy mouthfeel. This is an approachable recipe and works well on a variety of coffees and brewers, but particularly shines with light to medium-light roasted washed coffees. </p>",
+      "ppm": [
+        36.0,
+        36.0,
+        9.0,
+        9.0
+      ]
+    },
+    {
+      "rawValue": "rao_perger",
+      "name": "Rao's Recipe",
+      "description": "An updated recipe from Scott Rao. This is a very well balanced recipe that is usable for pretty much anything. Including all four minerals helps to maximize flavor while keeping the overall TDS low enhances clarity and acidity.",
+      "descriptionHTML": "<p>An updated recipe from Scott Rao. This is a very well balanced recipe that is usable for pretty much anything. Including all four minerals helps to maximize flavor while keeping the overall TDS low enhances clarity and acidity. </p>",
+      "ppm": [
+        40.2,
+        32.1,
+        8.0,
+        12.1
+      ]
+    },
+    {
+      "rawValue": "ultra_light",
+      "name": "Ultra Light",
+      "description": "This recipe is designed to get out of the way of the coffee, giving it just enough structure to complement what is inherently there without overwhelming your senses. This water is intentionally very soft to allow for maximum terroir-driven complexity.",
+      "descriptionHTML": "<p>This recipe is designed to get out of the way of the coffee, giving it just enough structure to complement what is inherently there without overwhelming your senses. This water is intentionally very soft to allow for maximum terroir-driven complexity. </p>",
+      "ppm": [
+        20.0,
+        15.0,
+        10.0,
+        0.0
+      ]
+    }
+  ]
+}

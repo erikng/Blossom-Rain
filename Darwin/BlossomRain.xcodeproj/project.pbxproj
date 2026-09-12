@@ -16,6 +16,10 @@
 		B20000000000000000000005 /* RecipesTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000005 /* RecipesTab.swift */; };
 		B20000000000000000000006 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000006 /* SettingsTab.swift */; };
 		B20000000000000000000007 /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000007 /* Units.swift */; };
+		B20000000000000000000008 /* RecipeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000008 /* RecipeDetails.swift */; };
+		B20000000000000000000009 /* RecipeLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000009 /* RecipeLibrary.swift */; };
+		B2000000000000000000000A /* CustomRecipeEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000000000000000000000A /* CustomRecipeEditor.swift */; };
+		B2000000000000000000000B /* RecipeAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000000000000000000000B /* RecipeAnalysisView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +37,10 @@
 		B10000000000000000000005 /* RecipesTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesTab.swift; sourceTree = "<group>"; };
 		B10000000000000000000006 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		B10000000000000000000007 /* Units.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Units.swift; sourceTree = "<group>"; };
+		B10000000000000000000008 /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
+		B10000000000000000000009 /* RecipeLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeLibrary.swift; sourceTree = "<group>"; };
+		B1000000000000000000000A /* CustomRecipeEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRecipeEditor.swift; sourceTree = "<group>"; };
+		B1000000000000000000000B /* RecipeAnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAnalysisView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +64,10 @@
 				B10000000000000000000005 /* RecipesTab.swift */,
 				B10000000000000000000006 /* SettingsTab.swift */,
 				B10000000000000000000007 /* Units.swift */,
+				B10000000000000000000008 /* RecipeDetails.swift */,
+				B10000000000000000000009 /* RecipeLibrary.swift */,
+				B1000000000000000000000A /* CustomRecipeEditor.swift */,
+				B1000000000000000000000B /* RecipeAnalysisView.swift */,
 			);
 			name = Sources;
 			path = ../Sources/BlossomRain;
@@ -166,6 +178,10 @@
 				B20000000000000000000005 /* RecipesTab.swift in Sources */,
 				B20000000000000000000006 /* SettingsTab.swift in Sources */,
 				B20000000000000000000007 /* Units.swift in Sources */,
+				B20000000000000000000008 /* RecipeDetails.swift in Sources */,
+				B20000000000000000000009 /* RecipeLibrary.swift in Sources */,
+				B2000000000000000000000A /* CustomRecipeEditor.swift in Sources */,
+				B2000000000000000000000B /* RecipeAnalysisView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

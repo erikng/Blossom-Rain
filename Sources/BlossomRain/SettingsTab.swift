@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsTab: View {
     @EnvironmentObject var brState: BRState
-    @AppStorage("defaultRecipe") var defaultRecipe: Recipes = .light_and_bright
+    @EnvironmentObject private var library: RecipeLibrary
     @AppStorage("defaultUnit") var defaultUnit: Units = .milliliter
     @AppStorage("disableIdleTimer") var disableIdleTimer: Bool = true
     @AppStorage("roundTippedDropperCalcium") var roundTippedDropperCalcium: Bool = true
@@ -108,12 +108,13 @@ struct SettingsTab: View {
                         Text("The recipe when you start the app from deep sleep.")
                             .font(.footnote)
                             .foregroundColor(.secondary)
-                        Picker("Recipes", selection: $defaultRecipe) {
-                            ForEach(Recipes.allCases) { recipe in
-                                Text(recipe.selectedRecipe.name)
-                                    .tag(recipe)
-                            }
+                        Picker("Recipes", selection: Binding(
+                            get: { library.defaultID },
+                            set: { library.setDefault($0) }
+                        )) {
+                            RecipePickerOptions(includeCustomEditor: false)
                         }
+                        .accessibilityIdentifier("defaultRecipePicker")
                     }
                 } header: {
                     Text("Defaults")
@@ -152,11 +153,6 @@ struct SettingsTab: View {
         .onChange(of: defaultUnit) {
             brState.unit = defaultUnit
             updateUnits(selectedUnit: defaultUnit)
-        }
-        .onChange(of: defaultRecipe) {
-            brState.recipe = defaultRecipe
-            updatePartsPerMillionValues(selectedRecipe: defaultRecipe)
-            updateDescription(selectedRecipe: defaultRecipe)
         }
         .onChange(of: roundTippedDropperCalcium) {
             calculateMultipliers(roundTippedDropperCalcium: roundTippedDropperCalcium, roundTippedDropperMagnesium: roundTippedDropperMagnesium, roundTippedDropperPotassium: roundTippedDropperPotassium, roundTippedDropperSodium: roundTippedDropperSodium)

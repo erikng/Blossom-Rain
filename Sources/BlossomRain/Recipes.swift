@@ -20,7 +20,8 @@ struct Recipe: Codable, Hashable, Identifiable {
 
 // Enum for Recipes that conforms to Identifiable using String as the ID
 enum Recipes: String, CaseIterable, Identifiable {
-    case bright_and_juicy, light_and_bright, light_and_bright_espresso, rao_perger, simple_and_sweet, simple_and_sweet_espresso
+    // Keep rao_perger as the stored value so existing default-recipe selections survive.
+    case bright_and_juicy, light_and_bright, light_and_bright_espresso, rao_perger, simple_and_sweet, simple_and_sweet_espresso, ultra_light
     
     // Use the rawValue of the enum as the id
     var id: String { self.rawValue }
@@ -34,16 +35,19 @@ enum Recipes: String, CaseIterable, Identifiable {
         case .rao_perger: return raoPerger
         case .simple_and_sweet: return simpleAndSweet
         case .simple_and_sweet_espresso: return simpleAndSweetEspresso
+        case .ultra_light: return ultraLight
         }
     }
 }
 
 
-// Configure the recipes
+// Published presets: https://lotuscoffeeproducts.com/pages/product-instructions
+// Synced 2026-09-12; upstream data is saved in Reference/Lotus/recipes.json.
+// Mineral targets use Lotus's ppm-as-CaCO3 basis, not individual ion concentrations.
 let brightAndJuicy = Recipe(
     id: UUID(),
     name: "Bright & Juicy",
-    description: "Developed by [Mike Bawden](https://www.instagram.com/micsmox), Bright and Juicy gives a bright and balanced cup with a juicy mouthfeel. This is an approachable recipe and works well on a variety of coffees and brewers, but particularly shines with light to medium-light roasted washed coffees.",
+    description: "Developed by Mike Bawden founder of [Curious Coffee](https://www.curious-coffee.com/), Bright and Juicy gives a bright and balanced cup with a juicy mouthfeel. This is an approachable recipe and works well on a variety of coffees and brewers, but particularly shines with light to medium-light roasted washed coffees.",
     calciumPartsPerMillion: 36.0,
     magnesiumPartsPerMillion: 36.0,
     potassiumPartsPerMillion: 9.0,
@@ -63,7 +67,8 @@ let lightAndBright = Recipe(
 let lightAndBrightEspresso = Recipe(
     id: UUID(),
     name: "Light & Bright (Espresso)",
-    description: "Developed by the incredibly talented [Lance Hedrick](https://www.instagram.com/lancehedrick), Light and Bright was created with one goal in mind: To find a water recipe that highlights the acidity in coffee while also maintaining a high degree of flavor clarity. After hours of cupping different recipes, a clear winner stood out amongst the rest. This recipe is best used with lightly roasted coffee when a bright and flavorful cup is desired.",
+    // The espresso variant shares its creator and description with the filter recipe.
+    description: lightAndBright.description,
     calciumPartsPerMillion: 0.0,
     magnesiumPartsPerMillion: 20.0,
     potassiumPartsPerMillion: 45.0,
@@ -72,12 +77,12 @@ let lightAndBrightEspresso = Recipe(
 
 let raoPerger = Recipe(
     id: UUID(),
-    name: "Rao/Perger",
-    description: "A very well balanced recipe and usable for pretty much anything. While very similar to our Simple and Sweet with regards to its total GH and KH, the increased magnesium helps create a more bodied and complex cup while the usage of equal parts sodium and potassium give a moderate acidity that is bright but not sharp and smooth but not boring.",
-    calciumPartsPerMillion: 27.2,
-    magnesiumPartsPerMillion: 60.0,
-    potassiumPartsPerMillion: 20.0,
-    sodiumPartsPerMillion: 20.0
+    name: "Rao's Recipe",
+    description: "An updated recipe from Scott Rao. This is a very well balanced recipe that is usable for pretty much anything. Including all four minerals helps to maximize flavor while keeping the overall TDS low enhances clarity and acidity.",
+    calciumPartsPerMillion: 40.2,
+    magnesiumPartsPerMillion: 32.1,
+    potassiumPartsPerMillion: 8.0,
+    sodiumPartsPerMillion: 12.1
 )
 
 let simpleAndSweet = Recipe(
@@ -93,9 +98,19 @@ let simpleAndSweet = Recipe(
 let simpleAndSweetEspresso = Recipe(
     id: UUID(),
     name: "Simple & Sweet (Espresso)",
-    description: "",
+    description: simpleAndSweet.description,
     calciumPartsPerMillion: 0.0,
     magnesiumPartsPerMillion: 20.0,
     potassiumPartsPerMillion: 0.0,
     sodiumPartsPerMillion: 55.0
+)
+
+let ultraLight = Recipe(
+    id: UUID(),
+    name: "Ultra Light",
+    description: "This recipe is designed to get out of the way of the coffee, giving it just enough structure to complement what is inherently there without overwhelming your senses. This water is intentionally very soft to allow for maximum terroir-driven complexity.",
+    calciumPartsPerMillion: 20.0,
+    magnesiumPartsPerMillion: 15.0,
+    potassiumPartsPerMillion: 10.0,
+    sodiumPartsPerMillion: 0.0
 )

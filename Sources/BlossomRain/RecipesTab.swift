@@ -9,22 +9,40 @@ import SwiftUI
 
 struct RecipesTab: View {
     @EnvironmentObject var brState: BRState
-    @AppStorage("defaultRecipe") var defaultRecipe: Recipes = .light_and_bright
+    @EnvironmentObject private var library: RecipeLibrary
     @AppStorage("defaultUnit") var defaultUnit: Units = .milliliter
     @AppStorage("useManualVolumeInput") var useManualVolumeInput: Bool = false
     @AppStorage("volumeInputStepper") var volumeInputStepper: Double = 25.0
     @FocusState private var keyboardIsFocused: Bool
+    @State private var recipeToDelete: Recipe?
+    @State private var errorMessage: String?
     
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    Picker("Recipes", selection: $brState.recipe) {
-                        ForEach(Recipes.allCases) { recipe in
-                            Text(recipe.selectedRecipe.name)
-                                .tag(recipe)
-                        }
+                    Picker("Recipes", selection: Binding(
+                        get: { library.selectedID },
+                        set: { library.select($0) }
+                    )) {
+                        RecipePickerOptions()
                     }
+                    .accessibilityIdentifier("recipePicker")
+                    if let saved = library.selectedSavedRecipe {
+                        HStack {
+                            Button("Edit Recipe") { library.editSelectedRecipe() }
+                            Spacer()
+                            Button("Delete Recipe", role: .destructive) { recipeToDelete = saved }
+                        }
+                        .buttonStyle(.borderless)
+                    }
+                }
+
+                if let message = library.loadError {
+                    Section { Text(message).foregroundStyle(.red) }
+                }
+                if library.selectedID == RecipeLibrary.customSelectionID {
+                    CustomRecipeEditor()
                 }
 
                 Section {
@@ -87,6 +105,7 @@ struct RecipesTab: View {
                     Text("Volume")
                 } footer: {}
                 
+                if let recipe = library.currentRecipe {
                 Section {
                     // TODO: Refactor the calculations for all four minerals
                     // The only difference between each of these computed text values are the milliliter, liter, and gallon (primary, secondary) dividers
@@ -94,14 +113,16 @@ struct RecipesTab: View {
                         Text("Calcium")
                         Spacer()
                         let calciumDropCount: Int = {
-                            let baseMultiplier = calciumComposition.baseMultiplier * calciumComposition.partsPerMillionMultiplier * brState.calciumPartsPerMillion
+                            // Match Lotus's operation order at half-drop rounding boundaries.
+                            let baseMultiplier = calciumComposition.baseMultiplier * recipe.calciumPartsPerMillion
+                            let dropperMultiplier = calciumComposition.partsPerMillionMultiplier / brState.calciumDropperTypeMultiplier
                             let unitVolume = unitVolumeCalculator(
                                 mlVolumeDivider: calciumComposition.mlVolumeDivider,
                                 lVolumeDivider: calciumComposition.lVolumeDivider,
                                 gPrimaryVolumeDivider: calciumComposition.gPrimaryVolumeDivider,
                                 gSecondaryVolumeDivider: calciumComposition.gSecondaryVolumeDivider
                             )
-                            return Int(round(baseMultiplier * unitVolume / brState.calciumDropperTypeMultiplier))
+                            return Int(round(baseMultiplier * unitVolume * dropperMultiplier))
                         }()
                         Text("\(calciumDropCount)")
                             .bold()
@@ -113,14 +134,15 @@ struct RecipesTab: View {
                         Text("Magnesium")
                         Spacer()
                         let magnesiumDropCount: Int = {
-                            let baseMultiplier = magnesiumComposition.baseMultiplier * magnesiumComposition.partsPerMillionMultiplier * brState.magnesiumPartsPerMillion
+                            let baseMultiplier = magnesiumComposition.baseMultiplier * recipe.magnesiumPartsPerMillion
+                            let dropperMultiplier = magnesiumComposition.partsPerMillionMultiplier / brState.magnesiumDropperTypeMultiplier
                             let unitVolume = unitVolumeCalculator(
                                 mlVolumeDivider: magnesiumComposition.mlVolumeDivider,
                                 lVolumeDivider: magnesiumComposition.lVolumeDivider,
                                 gPrimaryVolumeDivider: magnesiumComposition.gPrimaryVolumeDivider,
                                 gSecondaryVolumeDivider: magnesiumComposition.gSecondaryVolumeDivider
                             )
-                            return Int(round(baseMultiplier * unitVolume / brState.magnesiumDropperTypeMultiplier))
+                            return Int(round(baseMultiplier * unitVolume * dropperMultiplier))
                         }()
                         Text("\(magnesiumDropCount)")
                             .bold()
@@ -132,14 +154,15 @@ struct RecipesTab: View {
                         Text("Potassium")
                         Spacer()
                         let potassiumDropCount: Int = {
-                            let baseMultiplier = potassiumComposition.baseMultiplier * potassiumComposition.partsPerMillionMultiplier * brState.potassiumPartsPerMillion
+                            let baseMultiplier = potassiumComposition.baseMultiplier * recipe.potassiumPartsPerMillion
+                            let dropperMultiplier = potassiumComposition.partsPerMillionMultiplier / brState.potassiumDropperTypeMultiplier
                             let unitVolume = unitVolumeCalculator(
                                 mlVolumeDivider: potassiumComposition.mlVolumeDivider,
                                 lVolumeDivider: potassiumComposition.lVolumeDivider,
                                 gPrimaryVolumeDivider: potassiumComposition.gPrimaryVolumeDivider,
                                 gSecondaryVolumeDivider: potassiumComposition.gSecondaryVolumeDivider
                             )
-                            return Int(round(baseMultiplier * unitVolume / brState.potassiumDropperTypeMultiplier))
+                            return Int(round(baseMultiplier * unitVolume * dropperMultiplier))
                         }()
                         Text("\(potassiumDropCount)")
                             .bold()
@@ -151,14 +174,15 @@ struct RecipesTab: View {
                         Text("Sodium")
                         Spacer()
                         let sodiumDropCount: Int = {
-                            let baseMultiplier = sodiumComposition.baseMultiplier * sodiumComposition.partsPerMillionMultiplier * brState.sodiumPartsPerMillion
+                            let baseMultiplier = sodiumComposition.baseMultiplier * recipe.sodiumPartsPerMillion
+                            let dropperMultiplier = sodiumComposition.partsPerMillionMultiplier / brState.sodiumDropperTypeMultiplier
                             let unitVolume = unitVolumeCalculator(
                                 mlVolumeDivider: sodiumComposition.mlVolumeDivider,
                                 lVolumeDivider: sodiumComposition.lVolumeDivider,
                                 gPrimaryVolumeDivider: sodiumComposition.gPrimaryVolumeDivider,
                                 gSecondaryVolumeDivider: sodiumComposition.gSecondaryVolumeDivider
                             )
-                            return Int(round(baseMultiplier * unitVolume / brState.sodiumDropperTypeMultiplier))
+                            return Int(round(baseMultiplier * unitVolume * dropperMultiplier))
                         }()
                         Text("\(sodiumDropCount)")
                             .bold()
@@ -169,11 +193,13 @@ struct RecipesTab: View {
                     Text("Drops")
                         .padding(.top)
                 } footer: {}
-                
+
+                RecipeAnalysisView(recipe: recipe)
+
                 Section {
                     HStack {
-                        if !brState.recipeDescription.isEmpty {
-                            Text(LocalizedStringKey(brState.recipeDescription))
+                        if !recipe.description.isEmpty {
+                            Text(LocalizedStringKey(recipe.description))
                                 .font(.footnote)
                                 .foregroundColor(.secondary)
                         }
@@ -186,6 +212,7 @@ struct RecipesTab: View {
                         .foregroundColor(.secondary)
                         .padding(.top)
                 }
+                }
             }
             .navigationTitle("Recipes")
             .navigationBarTitleDisplayMode(.inline)
@@ -196,6 +223,25 @@ struct RecipesTab: View {
                 }
             }
         }
+        .confirmationDialog("Delete \(recipeToDelete?.name ?? "recipe")?", isPresented: Binding(
+            get: { recipeToDelete != nil },
+            set: { if !$0 { recipeToDelete = nil } }
+        ), titleVisibility: .visible) {
+            Button("Delete Recipe", role: .destructive) {
+                guard let recipe = recipeToDelete else { return }
+                do { try library.deleteRecipe(recipe.id) }
+                catch { errorMessage = error.localizedDescription }
+                recipeToDelete = nil
+            }
+        }
+        .alert("Could Not Delete Recipe", isPresented: Binding(
+            get: { errorMessage != nil },
+            set: { if !$0 { errorMessage = nil } }
+        )) {
+            Button("OK", role: .cancel) { errorMessage = nil }
+        } message: {
+            Text(errorMessage ?? "")
+        }
         .scrollDismissesKeyboard(.immediately)
         .onTapGesture(count: keyboardIsFocused ? 1 : .max, perform: {
             // if keyboard shown use single tap to close it, otherwise set .max to not interfere with other swiftui elements
@@ -203,10 +249,6 @@ struct RecipesTab: View {
         })
         .onChange(of: brState.unitVolumeString) {
             brState.unitVolume = Double(brState.unitVolumeString) ?? 0.0
-        }
-        .onChange(of: brState.recipe) {
-            updatePartsPerMillionValues(selectedRecipe: brState.recipe)
-            updateDescription(selectedRecipe: brState.recipe)
         }
         .onChange(of: brState.unit) {
             updateUnits(selectedUnit: brState.unit)

@@ -10,7 +10,6 @@ import UIKit
 
 public struct ContentView: View {
     @EnvironmentObject var brState: BRState
-    @AppStorage("defaultRecipe") var defaultRecipe: Recipes = .light_and_bright
     @AppStorage("defaultUnit") var defaultUnit: Units = .milliliter
     @AppStorage("disableIdleTimer") var disableIdleTimer: Bool = true
     @AppStorage("roundTippedDropperCalcium") var roundTippedDropperCalcium: Bool = true
@@ -33,10 +32,7 @@ public struct ContentView: View {
                 }
         }
         .onAppear {
-            brState.recipe = defaultRecipe
             brState.unit = defaultUnit
-            updatePartsPerMillionValues(selectedRecipe: defaultRecipe)
-            updateDescription(selectedRecipe: defaultRecipe)
             updateScreenIdleTimer(disableIdleTimer: disableIdleTimer)
             updateUnits(selectedUnit: brState.unit)
             calculateMultipliers(roundTippedDropperCalcium: roundTippedDropperCalcium, roundTippedDropperMagnesium: roundTippedDropperMagnesium, roundTippedDropperPotassium: roundTippedDropperPotassium, roundTippedDropperSodium: roundTippedDropperSodium)
