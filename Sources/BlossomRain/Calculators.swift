@@ -1,63 +1,56 @@
-//
-//  Calculators.swift
-//  Blossom Rain
-//
-//  Created by Erik Gomez on 11/7/23.
-//
-
 import Foundation
 
-// Recipe Calculations
-struct MineralDropEquation: Codable, Hashable, Identifiable {
-    var id: UUID
-    var baseMultiplier: Double
-    var partsPerMillionMultiplier: Double
-    var mlVolumeDivider: Double
-    var lVolumeDivider: Double
-    var gPrimaryVolumeDivider: Double
-    var gSecondaryVolumeDivider: Double
+struct DropperConfiguration: Equatable, Sendable {
+    var calcium = true
+    var magnesium = true
+    var potassium = true
+    var sodium = true
+
+    func isRoundTipped(_ mineral: RecipeMineral) -> Bool {
+        switch mineral {
+        case .calcium: return calcium
+        case .magnesium: return magnesium
+        case .potassium: return potassium
+        case .sodium: return sodium
+        }
+    }
 }
 
-let calciumComposition = MineralDropEquation(
-    id: UUID(),
-    baseMultiplier: 1.0,
-    partsPerMillionMultiplier: 0.56,
-    mlVolumeDivider: 4500.0,
-    lVolumeDivider: 4.5,
-    gPrimaryVolumeDivider: 4500.0,
-    gSecondaryVolumeDivider: 3785.0
-)
-let magnesiumComposition = MineralDropEquation(
-    id: UUID(),
-    baseMultiplier: 1.0,
-    partsPerMillionMultiplier: 0.56,
-    mlVolumeDivider: 4500.0,
-    lVolumeDivider: 4.5,
-    gPrimaryVolumeDivider: 4500.0,
-    gSecondaryVolumeDivider: 3785.0
-)
-let potassiumComposition = MineralDropEquation(
-    id: UUID(),
-    baseMultiplier: 2.0,
-    partsPerMillionMultiplier: 0.56,
-    mlVolumeDivider: 4500.0,
-    lVolumeDivider: 4.5,
-    gPrimaryVolumeDivider: 4500.0,
-    gSecondaryVolumeDivider: 3785.0
-)
-let sodiumComposition = MineralDropEquation(
-    id: UUID(),
-    baseMultiplier: 2.0,
-    partsPerMillionMultiplier: 0.56,
-    mlVolumeDivider: 4500.0,
-    lVolumeDivider: 4.5,
-    gPrimaryVolumeDivider: 4500.0,
-    gSecondaryVolumeDivider: 3785.0
-)
+struct MineralDropCount: Identifiable, Sendable {
+    let mineral: RecipeMineral
+    let count: Int
+    var id: RecipeMineral { mineral }
+}
 
-func calculateMultipliers(roundTippedDropperCalcium: Bool, roundTippedDropperMagnesium: Bool, roundTippedDropperPotassium: Bool, roundTippedDropperSodium: Bool) {
-    mainBRState.calciumDropperTypeMultiplier = roundTippedDropperCalcium ? 1.0 : 0.56
-    mainBRState.magnesiumDropperTypeMultiplier = roundTippedDropperMagnesium ? 1.0 : 0.56
-    mainBRState.potassiumDropperTypeMultiplier = roundTippedDropperPotassium ? 1.0 : 0.56
-    mainBRState.sodiumDropperTypeMultiplier = roundTippedDropperSodium ? 1.0 : 0.56
+enum RecipeCalculator {
+    static func drops(for recipe: Recipe, volume: Double, unit: Units,
+                      droppers: DropperConfiguration) -> [MineralDropCount]? {
+        var result: [MineralDropCount] = []
+        for mineral in RecipeMineral.allCases {
+            guard let count = dropCount(partsPerMillion: recipe.partsPerMillion(for: mineral),
+                                        mineral: mineral, volume: volume, unit: unit,
+                                        roundTipped: droppers.isRoundTipped(mineral)) else { return nil }
+            result.append(MineralDropCount(mineral: mineral, count: count))
+        }
+        return result
+    }
+
+    static func dropCount(partsPerMillion: Double, mineral: RecipeMineral,
+                          volume: Double, unit: Units, roundTipped: Bool) -> Int? {
+        guard partsPerMillion.isFinite, partsPerMillion >= 0,
+              volume.isFinite, volume >= 0 else { return nil }
+
+        let normalizedVolume: Double
+        switch unit {
+        case .milliliter: normalizedVolume = volume / 4500.0
+        case .liter: normalizedVolume = volume / 4.5
+        case .gallon: normalizedVolume = volume / (4500.0 / 3785.0)
+        }
+        let baseMultiplier = (mineral == .calcium || mineral == .magnesium ? 1.0 : 2.0) * partsPerMillion
+        let dropperMultiplier = 0.56 / (roundTipped ? 1.0 : 0.56)
+        // Preserve Lotus's operation order at half-drop rounding boundaries.
+        let rounded = (baseMultiplier * normalizedVolume * dropperMultiplier).rounded()
+        // A manual input may overflow Int even when the Double is finite.
+        return Int(exactly: rounded)
+    }
 }

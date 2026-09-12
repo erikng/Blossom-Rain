@@ -15,17 +15,15 @@ enum RecipeInputField: Hashable {
 }
 
 struct RecipesTab: View {
-    @EnvironmentObject var brState: BRState
-    @EnvironmentObject private var library: RecipeLibrary
-    @AppStorage("defaultUnit") var defaultUnit: Units = .milliliter
-    @AppStorage("useManualVolumeInput") var useManualVolumeInput: Bool = false
-    @AppStorage("volumeInputStepper") var volumeInputStepper: Double = 25.0
+    @Environment(RecipeLibrary.self) private var library
     @FocusState private var focusedField: RecipeInputField?
     @State private var recipeToDelete: Recipe?
     @State private var errorMessage: String?
     @State private var errorTitle: LocalizedStringKey = "Could Not Delete Recipe"
     
     var body: some View {
+        @Bindable var library = library
+        let recipe = library.currentRecipe
         NavigationStack {
             Form {
                 Section {
@@ -45,144 +43,11 @@ struct RecipesTab: View {
                     CustomRecipeEditor(focusedField: $focusedField)
                 }
 
-                Section {
-                    Picker("Unit", selection: $brState.unit) {
-                        ForEach(Units.allCases) { unit in
-                            Text(unit.selectedUnit.name)
-                                .tag(unit)
-                        }
-                    }
+                RecipeVolumeSection(focusedField: $focusedField)
 
-                    if useManualVolumeInput {
-                        HStack {
-                            TextField(text: $brState.unitVolumeString) {
-                                Text(brState.unitText)
-                            }
-                            .keyboardType(.numberPad)
-                            .focused($focusedField, equals: .volume)
-                        }
-                    } else {
-                        HStack {
-                            let max = brState.unit.selectedUnit.maxStep
-                            let stepSize = brState.unit == .milliliter ? volumeInputStepper : brState.unit.selectedUnit.initialStep
-                            let shouldOmitStep = brState.unit == .milliliter && [1.0, 5.0, 10.0].contains(volumeInputStepper)
-
-                            let binding = Binding<Double>(
-                                get: { brState.unitVolume },
-                                set: { newValue in
-                                    let rounded = (newValue / stepSize).rounded() * stepSize
-                                    brState.unitVolume = rounded
-                                }
-                            )
-
-                            if shouldOmitStep {
-                                Slider(value: binding, in: 0...max)
-                            } else {
-                                Slider(value: binding, in: 0...max, step: stepSize)
-                            }
-
-                            // Display as Int if steps are whole numbers, else with decimal precision
-                            if stepSize.truncatingRemainder(dividingBy: 1.0) == 0 {
-                                Text("\(Int(brState.unitVolume))")
-                            } else {
-                                Text(String(format: "%.2f", brState.unitVolume))
-                            }
-                        }
-                    }
-                } header: {
-                    Text("Volume")
-                } footer: {}
-                
-                if let recipe = library.currentRecipe {
-                Section {
-                    // TODO: Refactor the calculations for all four minerals
-                    // The only difference between each of these computed text values are the milliliter, liter, and gallon (primary, secondary) dividers
-                    HStack {
-                        Text("Calcium")
-                        Spacer()
-                        let calciumDropCount: Int = {
-                            // Match Lotus's operation order at half-drop rounding boundaries.
-                            let baseMultiplier = calciumComposition.baseMultiplier * recipe.calciumPartsPerMillion
-                            let dropperMultiplier = calciumComposition.partsPerMillionMultiplier / brState.calciumDropperTypeMultiplier
-                            let unitVolume = unitVolumeCalculator(
-                                mlVolumeDivider: calciumComposition.mlVolumeDivider,
-                                lVolumeDivider: calciumComposition.lVolumeDivider,
-                                gPrimaryVolumeDivider: calciumComposition.gPrimaryVolumeDivider,
-                                gSecondaryVolumeDivider: calciumComposition.gSecondaryVolumeDivider
-                            )
-                            return Int(round(baseMultiplier * unitVolume * dropperMultiplier))
-                        }()
-                        Text("\(calciumDropCount)")
-                            .bold()
-                    }
-                    .foregroundColor(.white)
-                    .listRowBackground(Color(red: 232.0/255.0, green: 202.0/255.0, blue: 187.0/255.0))
-
-                    HStack {
-                        Text("Magnesium")
-                        Spacer()
-                        let magnesiumDropCount: Int = {
-                            let baseMultiplier = magnesiumComposition.baseMultiplier * recipe.magnesiumPartsPerMillion
-                            let dropperMultiplier = magnesiumComposition.partsPerMillionMultiplier / brState.magnesiumDropperTypeMultiplier
-                            let unitVolume = unitVolumeCalculator(
-                                mlVolumeDivider: magnesiumComposition.mlVolumeDivider,
-                                lVolumeDivider: magnesiumComposition.lVolumeDivider,
-                                gPrimaryVolumeDivider: magnesiumComposition.gPrimaryVolumeDivider,
-                                gSecondaryVolumeDivider: magnesiumComposition.gSecondaryVolumeDivider
-                            )
-                            return Int(round(baseMultiplier * unitVolume * dropperMultiplier))
-                        }()
-                        Text("\(magnesiumDropCount)")
-                            .bold()
-                    }
-                    .foregroundColor(.white)
-                    .listRowBackground(Color(red: 172.0/255.0, green: 85.0/255.0, blue: 95.0/255.0))
-
-                    HStack {
-                        Text("Potassium")
-                        Spacer()
-                        let potassiumDropCount: Int = {
-                            let baseMultiplier = potassiumComposition.baseMultiplier * recipe.potassiumPartsPerMillion
-                            let dropperMultiplier = potassiumComposition.partsPerMillionMultiplier / brState.potassiumDropperTypeMultiplier
-                            let unitVolume = unitVolumeCalculator(
-                                mlVolumeDivider: potassiumComposition.mlVolumeDivider,
-                                lVolumeDivider: potassiumComposition.lVolumeDivider,
-                                gPrimaryVolumeDivider: potassiumComposition.gPrimaryVolumeDivider,
-                                gSecondaryVolumeDivider: potassiumComposition.gSecondaryVolumeDivider
-                            )
-                            return Int(round(baseMultiplier * unitVolume * dropperMultiplier))
-                        }()
-                        Text("\(potassiumDropCount)")
-                            .bold()
-                    }
-                    .foregroundColor(.white)
-                    .listRowBackground(Color(red: 117.0/255.0, green: 166.0/255.0, blue: 167.0/255.0))
-
-                    HStack {
-                        Text("Sodium")
-                        Spacer()
-                        let sodiumDropCount: Int = {
-                            let baseMultiplier = sodiumComposition.baseMultiplier * recipe.sodiumPartsPerMillion
-                            let dropperMultiplier = sodiumComposition.partsPerMillionMultiplier / brState.sodiumDropperTypeMultiplier
-                            let unitVolume = unitVolumeCalculator(
-                                mlVolumeDivider: sodiumComposition.mlVolumeDivider,
-                                lVolumeDivider: sodiumComposition.lVolumeDivider,
-                                gPrimaryVolumeDivider: sodiumComposition.gPrimaryVolumeDivider,
-                                gSecondaryVolumeDivider: sodiumComposition.gSecondaryVolumeDivider
-                            )
-                            return Int(round(baseMultiplier * unitVolume * dropperMultiplier))
-                        }()
-                        Text("\(sodiumDropCount)")
-                            .bold()
-                    }
-                    .foregroundColor(Color(red: 117.0/255.0, green: 166.0/255.0, blue: 167.0/255.0))
-                    .listRowBackground(Color(red: 251.0/255.0, green: 240.0/255.0, blue: 242.0/255.0))
-                } header: {
-                    Text("Drops")
-                        .padding(.top)
-                } footer: {}
-
-                RecipeAnalysisView(recipe: recipe)
+                if let recipe {
+                    RecipeDropsSection(recipe: recipe)
+                    RecipeAnalysisView(recipe: recipe)
                 }
 
                 // Keep naming and notes beside the final actions, even with invalid mineral input.
@@ -199,7 +64,7 @@ struct RecipesTab: View {
                             .submitLabel(.return)
                             .submitScope()
                             .accessibilityIdentifier("customRecipeDescription")
-                    } else if let recipe = library.currentRecipe, !recipe.description.isEmpty {
+                    } else if let recipe, !recipe.description.isEmpty {
                         if library.selectedSavedRecipe != nil {
                             Text(verbatim: recipe.description)
                                 .font(.footnote)
@@ -242,6 +107,7 @@ struct RecipesTab: View {
                                 library.cancelEditing()
                             }
                             .buttonStyle(.borderless)
+                            .keyboardShortcut(.cancelAction)
                             .frame(maxWidth: .infinity, minHeight: 44)
                             .accessibilityIdentifier("cancelCustomRecipe")
                         }
@@ -250,8 +116,9 @@ struct RecipesTab: View {
                     .listRowBackground(Color.clear)
                 }
             }
+            .formStyle(.grouped)
             .navigationTitle("Recipes")
-            .navigationBarTitleDisplayMode(.inline)
+            .inlineNavigationTitle()
             .onSubmit {
                 if focusedField == .name {
                     focusedField = .description
@@ -260,8 +127,15 @@ struct RecipesTab: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .principal) {
-                    if let saved = library.selectedSavedRecipe {
+                #if os(macOS)
+                ToolbarItem {
+                    SettingsLink {
+                        Label("Settings", systemImage: "slider.horizontal.3")
+                    }
+                }
+                #endif
+                if let saved = library.selectedSavedRecipe {
+                    ToolbarItem(placement: .primaryAction) {
                         Menu {
                             Button {
                                 focusedField = nil
@@ -269,7 +143,6 @@ struct RecipesTab: View {
                             } label: {
                                 Label("Edit Recipe", systemImage: "pencil")
                             }
-
                             Button(role: .destructive) {
                                 focusedField = nil
                                 recipeToDelete = saved
@@ -277,21 +150,13 @@ struct RecipesTab: View {
                                 Label("Delete Recipe", systemImage: "trash")
                             }
                         } label: {
-                            HStack {
-                                Label("Recipes", systemImage: "waterbottle")
-                                    .foregroundColor(.secondary)
-                                Divider()
-                                Label("Recipe Actions", systemImage: "square.and.pencil")
-                                    .foregroundColor(.secondary)
-                            }
+                            Label("Recipe Actions", systemImage: "square.and.pencil")
                         }
                         .accessibilityHint("Edit or delete this saved recipe.")
                         .accessibilityIdentifier("savedRecipeActions")
-                    } else {
-                        Label("Recipes", systemImage: "waterbottle")
-                            .foregroundColor(.secondary)
                     }
                 }
+                #if os(iOS)
                 // Own the keyboard toolbar here once; Section rows can duplicate it.
                 if focusedField != nil {
                     ToolbarItemGroup(placement: .keyboard) {
@@ -300,6 +165,7 @@ struct RecipesTab: View {
                             .accessibilityIdentifier("dismissRecipeKeyboard")
                     }
                 }
+                #endif
             }
         }
         .alert("Delete \(recipeToDelete?.name ?? "recipe")?", isPresented: Binding(
@@ -324,17 +190,13 @@ struct RecipesTab: View {
         } message: {
             Text(errorMessage ?? "")
         }
+        #if os(iOS)
         .scrollDismissesKeyboard(.immediately)
         .onTapGesture(count: focusedField == .volume ? 1 : .max, perform: {
-            // Preserve tap-to-dismiss for manual volume input without intercepting editor controls.
+            // Preserve tap-to-dismiss without intercepting editor controls.
             focusedField = nil
         })
-        .onChange(of: brState.unitVolumeString) {
-            brState.unitVolume = Double(brState.unitVolumeString) ?? 0.0
-        }
-        .onChange(of: brState.unit) {
-            updateUnits(selectedUnit: brState.unit)
-        }
+        #endif
     }
 
     private func saveCustomRecipe() {
@@ -347,21 +209,4 @@ struct RecipesTab: View {
         }
     }
 
-    func unitVolumeCalculator(mlVolumeDivider: Double, lVolumeDivider: Double, gPrimaryVolumeDivider: Double, gSecondaryVolumeDivider: Double) -> Double {
-        let unitVolume: Double
-        switch brState.unit {
-            case .milliliter:
-                unitVolume = brState.unitVolume / sodiumComposition.mlVolumeDivider
-            case .liter:
-                unitVolume = brState.unitVolume / sodiumComposition.lVolumeDivider
-            default:
-                unitVolume = brState.unitVolume / (sodiumComposition.gPrimaryVolumeDivider / sodiumComposition.gSecondaryVolumeDivider)
-        }
-        return unitVolume
-    }
 }
-
-//#Preview {
-//    RecipesTab()
-//        .environmentObject(mainBRState)
-//}

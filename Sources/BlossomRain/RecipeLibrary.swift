@@ -1,19 +1,21 @@
-import Combine
 import Foundation
+import Observation
 
-final class RecipeLibrary: ObservableObject {
+@MainActor
+@Observable
+final class RecipeLibrary {
     static let storageKey = "customRecipes.v1"
     static let customSelectionID = "custom"
 
-    @Published private(set) var savedRecipes: [Recipe] = []
-    @Published private(set) var selectedID = Recipes.light_and_bright.rawValue
-    @Published private(set) var defaultID = Recipes.light_and_bright.rawValue
-    @Published private(set) var editingRecipeID: UUID?
-    @Published private(set) var loadError: String?
-    @Published var draft = CustomRecipeDraft()
+    private(set) var savedRecipes: [Recipe] = []
+    private(set) var selectedID = Recipes.light_and_bright.rawValue
+    private(set) var defaultID = Recipes.light_and_bright.rawValue
+    private(set) var editingRecipeID: UUID?
+    private(set) var loadError: String?
+    var draft = CustomRecipeDraft()
 
-    private let defaults: UserDefaults
-    private var previousSelectionID = Recipes.light_and_bright.rawValue
+    @ObservationIgnored private let defaults: UserDefaults
+    @ObservationIgnored private var previousSelectionID = Recipes.light_and_bright.rawValue
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults

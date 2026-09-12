@@ -2,6 +2,7 @@ import Foundation
 
 @main
 struct RecipeFeatureChecks {
+    @MainActor
     static func main() throws {
         var failures = 0
         func check(_ condition: Bool, _ message: String) {

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SettingsTab: View {
-    @EnvironmentObject var brState: BRState
-    @EnvironmentObject private var library: RecipeLibrary
+    @Environment(BRState.self) private var brState
+    @Environment(RecipeLibrary.self) private var library
     @AppStorage("defaultUnit") var defaultUnit: Units = .milliliter
     @AppStorage("disableIdleTimer") var disableIdleTimer: Bool = true
     @AppStorage("roundTippedDropperCalcium") var roundTippedDropperCalcium: Bool = true
@@ -18,7 +18,7 @@ struct SettingsTab: View {
     @AppStorage("roundTippedDropperSodium") var roundTippedDropperSodium: Bool = true
     @AppStorage("useManualVolumeInput") var useManualVolumeInput: Bool = false
     @AppStorage("volumeInputStepper") var volumeInputStepper: Double = 25.0
-    var volumeInputSteppers = [1.0, 5.0, 10.0, 20.0, 25.0]
+    private let volumeInputSteppers = [1.0, 5.0, 10.0, 20.0, 25.0]
     
     var body: some View {
         NavigationStack {
@@ -31,7 +31,7 @@ struct SettingsTab: View {
                             Text("The amount of steps the **milliliter** slider will increase or decrease by.")
                                 .font(.footnote)
                                 .foregroundColor(.secondary)
-                            Picker("Appearance", selection: $volumeInputStepper) {
+                            Picker("Volume Input Steps (mL)", selection: $volumeInputStepper) {
                                 ForEach(volumeInputSteppers, id: \.self) {
                                     Text(String(Int($0)))
                                 }
@@ -51,16 +51,18 @@ struct SettingsTab: View {
                         }
                     }
                     
+                    #if os(iOS)
                     VStack(alignment: .leading) {
                         Toggle(isOn: $disableIdleTimer) {
                             VStack(alignment: .leading) {
                                 Text("Disable Screen Sleep")
-                                Text("Prevent the device from going to sleep while the application running.")
+                                Text("Prevent the device from going to sleep while the app is active.")
                                     .font(.footnote)
                                     .foregroundColor(.secondary)
                             }
                         }
                     }
+                    #endif
                 } header: {
                     Text("User Interface")
                 } footer: {}
@@ -91,7 +93,7 @@ struct SettingsTab: View {
                 Section {
                     VStack(alignment: .leading) {
                         Text("Default Unit")
-                        Text("The unit when you start the app from deep sleep.")
+                        Text("The unit selected when you start the app.")
                             .font(.footnote)
                             .foregroundColor(.secondary)
                         Picker("Unit", selection: $defaultUnit) {
@@ -105,7 +107,7 @@ struct SettingsTab: View {
 
                     VStack(alignment: .leading) {
                         Text("Default Recipe")
-                        Text("The recipe when you start the app from deep sleep.")
+                        Text("The recipe selected when you start the app.")
                             .font(.footnote)
                             .foregroundColor(.secondary)
                         Picker("Recipes", selection: Binding(
@@ -129,47 +131,12 @@ struct SettingsTab: View {
                     Text("Acknowledgements")
                 } footer: {}
             }
+            .formStyle(.grouped)
             .navigationTitle("Settings")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Label("Settings", systemImage: "slider.horizontal.3")
-                        .foregroundColor(.secondary)
-                }
-            }
+            .inlineNavigationTitle()
         }
-        .onChange(of: disableIdleTimer) {
-            updateScreenIdleTimer(disableIdleTimer: disableIdleTimer)
-        }
-        .onChange(of: useManualVolumeInput) {
-            if useManualVolumeInput {
-                updateUnits(selectedUnit: brState.unit)
-                brState.unitVolume = 0.0
-                brState.unitVolumeString = ""
-            } else {
-                updateUnits(selectedUnit: defaultUnit)
-            }
-        }
-        .onChange(of: defaultUnit) {
-            brState.unit = defaultUnit
-            updateUnits(selectedUnit: defaultUnit)
-        }
-        .onChange(of: roundTippedDropperCalcium) {
-            calculateMultipliers(roundTippedDropperCalcium: roundTippedDropperCalcium, roundTippedDropperMagnesium: roundTippedDropperMagnesium, roundTippedDropperPotassium: roundTippedDropperPotassium, roundTippedDropperSodium: roundTippedDropperSodium)
-        }
-        .onChange(of: roundTippedDropperMagnesium) {
-            calculateMultipliers(roundTippedDropperCalcium: roundTippedDropperCalcium, roundTippedDropperMagnesium: roundTippedDropperMagnesium, roundTippedDropperPotassium: roundTippedDropperPotassium, roundTippedDropperSodium: roundTippedDropperSodium)
-        }
-        .onChange(of: roundTippedDropperPotassium) {
-            calculateMultipliers(roundTippedDropperCalcium: roundTippedDropperCalcium, roundTippedDropperMagnesium: roundTippedDropperMagnesium, roundTippedDropperPotassium: roundTippedDropperPotassium, roundTippedDropperSodium: roundTippedDropperSodium)
-        }
-        .onChange(of: roundTippedDropperSodium) {
-            calculateMultipliers(roundTippedDropperCalcium: roundTippedDropperCalcium, roundTippedDropperMagnesium: roundTippedDropperMagnesium, roundTippedDropperPotassium: roundTippedDropperPotassium, roundTippedDropperSodium: roundTippedDropperSodium)
-        }
+        // Keep preference effects with their editor, including when the Mac recipe window is closed.
+        .onChange(of: defaultUnit) { brState.unit = defaultUnit }
+        .onChange(of: useManualVolumeInput) { brState.setManualInput(useManualVolumeInput) }
     }
 }
-
-//#Preview {
-//    SettingsTab()
-//        .environmentObject(mainBRState)
-//}

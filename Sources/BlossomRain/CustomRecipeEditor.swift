@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct CustomRecipeEditor: View {
-    @EnvironmentObject private var library: RecipeLibrary
+    @Environment(RecipeLibrary.self) private var library
     @FocusState.Binding var focusedField: RecipeInputField?
 
     var body: some View {
@@ -15,7 +15,7 @@ struct CustomRecipeEditor: View {
                             get: { library.draft[mineral] },
                             set: { library.draft[mineral] = $0 }
                         ))
-                        .keyboardType(.decimalPad)
+                        .decimalInputKeyboard()
                         .multilineTextAlignment(.trailing)
                         .frame(minWidth: 60, maxWidth: 110)
                         .focused($focusedField, equals: .mineral(mineral))
@@ -46,7 +46,7 @@ struct CustomRecipeEditor: View {
 }
 
 struct RecipePickerOptions: View {
-    @EnvironmentObject private var library: RecipeLibrary
+    @Environment(RecipeLibrary.self) private var library
     var includeCustomEditor = true
 
     var body: some View {

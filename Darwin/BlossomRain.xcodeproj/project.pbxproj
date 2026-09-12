@@ -20,6 +20,10 @@
 		B20000000000000000000009 /* RecipeLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000009 /* RecipeLibrary.swift */; };
 		B2000000000000000000000A /* CustomRecipeEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000000000000000000000A /* CustomRecipeEditor.swift */; };
 		B2000000000000000000000B /* RecipeAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000000000000000000000B /* RecipeAnalysisView.swift */; };
+		B2000000000000000000000C /* BRState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000000000000000000000C /* BRState.swift */; };
+		B2000000000000000000000D /* PlatformViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000000000000000000000D /* PlatformViewModifiers.swift */; };
+		B2000000000000000000000E /* RecipeVolumeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000000000000000000000E /* RecipeVolumeSection.swift */; };
+		B2000000000000000000000F /* RecipeDropsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000000000000000000000F /* RecipeDropsSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +45,10 @@
 		B10000000000000000000009 /* RecipeLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeLibrary.swift; sourceTree = "<group>"; };
 		B1000000000000000000000A /* CustomRecipeEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRecipeEditor.swift; sourceTree = "<group>"; };
 		B1000000000000000000000B /* RecipeAnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAnalysisView.swift; sourceTree = "<group>"; };
+		B1000000000000000000000C /* BRState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BRState.swift; sourceTree = "<group>"; };
+		B1000000000000000000000D /* PlatformViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformViewModifiers.swift; sourceTree = "<group>"; };
+		B1000000000000000000000E /* RecipeVolumeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeVolumeSection.swift; sourceTree = "<group>"; };
+		B1000000000000000000000F /* RecipeDropsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDropsSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +76,10 @@
 				B10000000000000000000009 /* RecipeLibrary.swift */,
 				B1000000000000000000000A /* CustomRecipeEditor.swift */,
 				B1000000000000000000000B /* RecipeAnalysisView.swift */,
+				B1000000000000000000000F /* RecipeDropsSection.swift */,
+				B1000000000000000000000E /* RecipeVolumeSection.swift */,
+				B1000000000000000000000D /* PlatformViewModifiers.swift */,
+				B1000000000000000000000C /* BRState.swift */,
 			);
 			name = Sources;
 			path = ../Sources/BlossomRain;
@@ -182,6 +194,10 @@
 				B20000000000000000000009 /* RecipeLibrary.swift in Sources */,
 				B2000000000000000000000A /* CustomRecipeEditor.swift in Sources */,
 				B2000000000000000000000B /* RecipeAnalysisView.swift in Sources */,
+				B2000000000000000000000F /* RecipeDropsSection.swift in Sources */,
+				B2000000000000000000000E /* RecipeVolumeSection.swift in Sources */,
+				B2000000000000000000000D /* PlatformViewModifiers.swift in Sources */,
+				B2000000000000000000000C /* BRState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,18 +209,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Blossom Rain";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.8;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -213,18 +220,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Blossom Rain";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.8;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

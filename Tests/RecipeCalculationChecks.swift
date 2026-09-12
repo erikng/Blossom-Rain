@@ -20,7 +20,6 @@ struct RecipeCalculationChecks {
         let data = try Data(contentsOf: URL(fileURLWithPath: CommandLine.arguments[1]))
         let samples = try JSONDecoder().decode([Sample].self, from: data)
         var failures = 0
-        let probe = RecipeCalculatorProbe()
         for sample in samples {
             let recipe: Recipe
             if sample.rawValue.hasPrefix("custom-") {
@@ -33,13 +32,16 @@ struct RecipeCalculationChecks {
                 }
                 recipe = preset.selectedRecipe
             }
-            mainBRState.unit = Units(rawValue: sample.unit)!
-            mainBRState.unitVolume = sample.volume
-            calculateMultipliers(roundTippedDropperCalcium: sample.roundStyles[0],
-                roundTippedDropperMagnesium: sample.roundStyles[1],
-                roundTippedDropperPotassium: sample.roundStyles[2],
-                roundTippedDropperSodium: sample.roundStyles[3])
-            let actualDrops = probe.drops(for: recipe)
+            let droppers = DropperConfiguration(calcium: sample.roundStyles[0],
+                magnesium: sample.roundStyles[1], potassium: sample.roundStyles[2],
+                sodium: sample.roundStyles[3])
+            guard let drops = RecipeCalculator.drops(for: recipe, volume: sample.volume,
+                    unit: Units(rawValue: sample.unit)!, droppers: droppers) else {
+                failures += 1
+                print("FAIL: Valid sample rejected: \(sample.rawValue), \(sample.volume) \(sample.unit)")
+                continue
+            }
+            let actualDrops = drops.map(\.count)
             let actualIons = recipe.ions.map(\.partsPerMillion)
             if actualDrops != sample.drops || actualIons != sample.ions ||
                 recipe.alkalinity != sample.x || recipe.hardness != sample.y ||

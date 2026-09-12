@@ -8,7 +8,7 @@
 import Foundation
 
 // Define the Recipe struct
-struct Recipe: Codable, Hashable, Identifiable {
+struct Recipe: Codable, Hashable, Identifiable, Sendable {
     var id: UUID
     var name: String
     var description: String

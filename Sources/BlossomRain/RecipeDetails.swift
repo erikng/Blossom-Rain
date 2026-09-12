@@ -1,13 +1,13 @@
 import Foundation
 
-enum RecipeMineral: String, CaseIterable, Identifiable {
+enum RecipeMineral: String, CaseIterable, Identifiable, Sendable {
     case calcium, magnesium, potassium, sodium
 
     var id: String { rawValue }
     var name: String { rawValue.capitalized }
 }
 
-struct RecipeIon: Identifiable {
+struct RecipeIon: Identifiable, Sendable {
     let name: String
     let symbol: String
     let partsPerMillion: Int
@@ -16,6 +16,15 @@ struct RecipeIon: Identifiable {
 }
 
 extension Recipe {
+    func partsPerMillion(for mineral: RecipeMineral) -> Double {
+        switch mineral {
+        case .calcium: return calciumPartsPerMillion
+        case .magnesium: return magnesiumPartsPerMillion
+        case .potassium: return potassiumPartsPerMillion
+        case .sodium: return sodiumPartsPerMillion
+        }
+    }
+
     // Match the target-water calculations in Reference/Lotus/calculate_values.js.
     // These are concentrations, independent of batch volume and rounded drop counts.
     var hardness: Double { magnesiumPartsPerMillion + calciumPartsPerMillion }
