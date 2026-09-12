@@ -5,9 +5,8 @@ build
 /Packages
 xcuserdata/
 DerivedData/
-.swiftpm/configuration/registries.json
-.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 .netrc
-.gradle
-Android/app/skye-design-key.jks
-Android/app/keystore.properties
+.idea/
+*.jks
+keystore.properties
+Darwin/fastlane/apikey.json

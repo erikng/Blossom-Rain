@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 public struct ContentView: View {
     @EnvironmentObject var brState: BRState
@@ -24,11 +25,11 @@ public struct ContentView: View {
         TabView {
             RecipesTab()
                 .tabItem {
-                    Label(title: { Text("Recipes") }, icon: { Image("waterbottle-skip", bundle: .module) })
+                    Label("Recipes", systemImage: "waterbottle")
                 }
             SettingsTab()
                 .tabItem {
-                    Label(title: { Text("Settings") }, icon: { Image("slider.horizontal.3-skip", bundle: .module) })
+                    Label("Settings", systemImage: "slider.horizontal.3")
                 }
         }
         .onAppear {
@@ -44,13 +45,11 @@ public struct ContentView: View {
 }
 
 func updateScreenIdleTimer(disableIdleTimer: Bool) {
-    #if !os(macOS)
     if disableIdleTimer {
         UIApplication.shared.isIdleTimerDisabled = true
     } else {
         UIApplication.shared.isIdleTimerDisabled = false
     }
-    #endif
 }
 
 //#Preview {

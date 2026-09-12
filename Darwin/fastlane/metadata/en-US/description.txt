@@ -1,1 +1,1 @@
-A great new app built with Skip!
+Blossom Rain helps you prepare water for coffee with Lotus Water mineral drops. Choose a recipe and water volume to calculate calcium, magnesium, potassium, and sodium drops. Supports milliliters, liters, and gallons, with settings for round or straight tipped droppers.

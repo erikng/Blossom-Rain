@@ -1,42 +1,39 @@
-# BlossomRain
+# Blossom Rain
 
-This is a [Skip](https://skip.tools) dual-platform app project.
-It builds a native app for both iOS and Android.
+Blossom Rain is a native SwiftUI app for iPhone and iPad that calculates
+Lotus Water mineral drops for coffee brewing recipes. It supports iOS 17
+and later and has no third-party app dependencies.
 
-## Building
+## Building and running
 
-This project is both a stand-alone Swift Package Manager module,
-as well as an Xcode project that builds and transpiles the project
-into a Kotlin Gradle project for Android using the Skip plugin.
+Open `Darwin/BlossomRain.xcodeproj` in Xcode 15 or later, select the
+`BlossomRain` scheme, and choose an iPhone or iPad simulator or device.
+Build and run with Xcode. For a physical device, select your development
+team in Signing & Capabilities.
 
-Building the module requires that Skip be installed using
-[Homebrew](https://brew.sh) with `brew install skiptools/skip/skip`.
+To build for the iOS Simulator from the repository root:
 
-This will also install the necessary transpiler prerequisites:
-Kotlin, Gradle, and the Android build tools.
+```sh
+xcodebuild \
+  -project Darwin/BlossomRain.xcodeproj \
+  -scheme BlossomRain \
+  -configuration Debug \
+  -destination 'generic/platform=iOS Simulator' \
+  -derivedDataPath .build/DerivedData \
+  CODE_SIGNING_ALLOWED=NO \
+  build
+```
 
-Installation prerequisites can be confirmed by running `skip checkup`.
+## Project layout
 
-## Testing
+- `Sources/BlossomRain/` contains the SwiftUI app, recipes, and calculators.
+- `Sources/BlossomRain/Resources/Localizable.xcstrings` contains translations.
+- `Darwin/` contains the Xcode project, app icons, and signing configuration.
 
-The module can be tested using the standard `swift test` command
-or by running the test target for the macOS destination in Xcode,
-which will run the Swift tests as well as the transpiled
-Kotlin JUnit tests in the Robolectric Android simulation environment.
+The Xcode app target compiles the Swift sources directly. App identity,
+version numbers, and deployment settings live in `Darwin/BlossomRain.xcconfig`.
 
-Parity testing can be performed with `skip test`,
-which will output a table of the test results for both platforms.
+## Distribution
 
-## Running
-
-Xcode and Android Studio must be downloaded and installed in order to
-run the app in the iOS simulator / Android emulator.
-An Android emulator must already be running, which can be launched from 
-Android Studio's Device Manager.
-
-To run both the Swift and Kotlin apps simultaneously, 
-launch the BlossomRainApp target from Xcode.
-A build phases runs the "Launch Android APK" script that
-will deploy the transpiled app a running Android emulator or connected device.
-Logging output for the iOS app can be viewed in the Xcode console, and in
-Android Studio's logcat tab for the transpiled Kotlin app.
+The optional Fastlane configuration in `Darwin/fastlane/` builds and submits
+iOS releases. See its README for setup instructions.

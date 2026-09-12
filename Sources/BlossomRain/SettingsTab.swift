@@ -51,7 +51,6 @@ struct SettingsTab: View {
                         }
                     }
                     
-                    #if !targetEnvironment(macCatalyst)
                     VStack(alignment: .leading) {
                         Toggle(isOn: $disableIdleTimer) {
                             VStack(alignment: .leading) {
@@ -62,7 +61,6 @@ struct SettingsTab: View {
                             }
                         }
                     }
-                    #endif
                 } header: {
                     Text("User Interface")
                 } footer: {}
@@ -131,17 +129,14 @@ struct SettingsTab: View {
                 } footer: {}
             }
             .navigationTitle("Settings")
-            #if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)
-            #endif
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Label(title: { Text("Settings") }, icon: { Image("slider.horizontal.3-skip", bundle: .module) })
+                    Label("Settings", systemImage: "slider.horizontal.3")
                         .foregroundColor(.secondary)
                 }
             }
         }
-        // TODO: Move the .onChange back when step-ui supports modifiers in line
         .onChange(of: disableIdleTimer) {
             updateScreenIdleTimer(disableIdleTimer: disableIdleTimer)
         }

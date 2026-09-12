@@ -1,16 +1,15 @@
 # This file contains the fastlane.tools configuration
-# for the iOS half of the Skip app.
+# for the Blossom Rain iOS app.
 # You can find the documentation at https://docs.fastlane.tools
 
 default_platform(:ios)
 
 lane :assemble do |options|
-  # only build the iOS side of the app
-  ENV["SKIP_ZERO"] = "true"
   build_app(
+    project: "BlossomRain.xcodeproj",
+    scheme: "BlossomRain",
     sdk: "iphoneos",
     xcconfig: "fastlane/AppStore.xcconfig",
-    xcargs: "-skipPackagePluginValidation -skipMacroValidation",
     derived_data_path: "../.build/Darwin/DerivedData",
     output_directory: "../.build/fastlane/Darwin",
     skip_archive: ENV["FASTLANE_SKIP_ARCHIVE"] == "YES",
@@ -29,4 +28,3 @@ lane :release do |options|
     release_notes: { default: "Fixes and improvements." }
   )
 end
-

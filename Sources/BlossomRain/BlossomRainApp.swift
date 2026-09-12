@@ -6,12 +6,7 @@
 //
 
 import Foundation
-import OSLog
 import SwiftUI
-
-let logger: Logger = Logger(subsystem: "Skye-Design.Blossom-Rain", category: "Food & Drink")
-/// The Android SDK number we are running against, or `nil` if not running on Android
-let androidSDK = ProcessInfo.processInfo.environment["android.os.Build.VERSION.SDK_INT"].flatMap({ Int($0) })
 
 class BRState: ObservableObject {
     @Published var calciumDropperTypeMultiplier = 1.0
@@ -37,41 +32,14 @@ class BRState: ObservableObject {
 }
 var mainBRState = BRState()
 
-public struct RootView : View {
+@main
+struct BlossomRainApp: App {
     @StateObject private var brState: BRState = mainBRState
-    
-    public init() {
-    }
-    
-    public var body: some View {
-        ContentView()
-            .environmentObject(brState)
-            .task {
-                logger.log("Running on \(androidSDK != nil ? "Android" : "Darwin")!")
-            }
-    }
-}
 
-#if !SKIP
-public protocol BlossomRainApp : App {
-}
-
-public extension BlossomRainApp {
     var body: some Scene {
         WindowGroup {
-            RootView()
-            #if targetEnvironment(macCatalyst)
-                .onReceive(NotificationCenter.default.publisher(for: UIScene.willConnectNotification)) { _ in
-                    // prevent window in macOS from being resized down
-                    UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
-                        windowScene.sizeRestrictions?.minimumSize = CGSize(width: 800, height: 1000)
-                        windowScene.sizeRestrictions?.maximumSize = CGSize(width: 800, height: 1000)
-                        windowScene.sizeRestrictions?.allowsFullScreen = false
-                    }
-                }
-            #endif
+            ContentView()
+                .environmentObject(brState)
         }
     }
 }
-#endif
-

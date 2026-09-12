@@ -40,11 +40,7 @@ struct RecipesTab: View {
                             TextField(text: $brState.unitVolumeString) {
                                 Text(brState.unitText)
                             }
-                            #if !os(macOS)
                             .keyboardType(.numberPad)
-                            #endif
-                            
-                            #if !SKIP
                             .focused($keyboardIsFocused)
                             .toolbar {
                                 ToolbarItem(placement: .keyboard) {
@@ -58,7 +54,6 @@ struct RecipesTab: View {
                                     }
                                 }
                             }
-                            #endif
                         }
                     } else {
                         HStack {
@@ -193,24 +188,19 @@ struct RecipesTab: View {
                 }
             }
             .navigationTitle("Recipes")
-            #if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)
-            #endif
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Label(title: { Text("Recipes") }, icon: { Image("waterbottle-skip", bundle: .module) })
+                    Label("Recipes", systemImage: "waterbottle")
                         .foregroundColor(.secondary)
                 }
             }
         }
-        #if !SKIP
         .scrollDismissesKeyboard(.immediately)
         .onTapGesture(count: keyboardIsFocused ? 1 : .max, perform: {
             // if keyboard shown use single tap to close it, otherwise set .max to not interfere with other swiftui elements
             keyboardIsFocused = false
         })
-        #endif
-        // TODO: Move the .onChange back when step-ui supports modifiers in line
         .onChange(of: brState.unitVolumeString) {
             brState.unitVolume = Double(brState.unitVolumeString) ?? 0.0
         }
