@@ -18,6 +18,28 @@ struct RecipeFeatureChecks {
               simpleAndSweetEspresso.description == simpleAndSweet.description,
               "Simple & Sweet Espresso must retain its parent description and creator credit")
 
+        var sliderDraft = CustomRecipeDraft()
+        let sliderSamples: [(input: Double, expected: Double)] = [
+            (83.2507610, 83), (78.4818202, 78), (40.5, 41),
+            (0, 0), (0.499999, 0), (149.999999, 150), (150, 150),
+            (-0.1, 0), (150.1, 150)
+        ]
+        for mineral in RecipeMineral.allCases {
+            for sample in sliderSamples {
+                sliderDraft.setSliderValue(sample.input, for: mineral)
+                check(sliderDraft.value(for: mineral) == sample.expected,
+                      "\(mineral.name) slider must write \(sample.expected) ppm for \(sample.input)")
+            }
+            sliderDraft[mineral] = "40.25"
+            check(sliderDraft.value(for: mineral) == 40.25,
+                  "Typing a decimal must remain independent of slider snapping")
+            for invalid in [Double.nan, Double.infinity, -Double.infinity] {
+                sliderDraft.setSliderValue(invalid, for: mineral)
+                check(sliderDraft.value(for: mineral) == 40.25,
+                      "A non-finite slider value must not replace a valid target")
+            }
+        }
+
         let suite = "BlossomRain.RecipeChecks.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suite)!
         defer { defaults.removePersistentDomain(forName: suite) }
@@ -86,8 +108,14 @@ struct RecipeFeatureChecks {
             check(false, "Blank recipe names must not be saved")
         } catch {}
         restored.draft.name = "Another recipe"
+        restored.draft.setSliderValue(83.2507610, for: .potassium)
+        restored.draft.setSliderValue(78.4818202, for: .sodium)
         try restored.saveDraft()
         check(restored.savedRecipes.count == 2, "Users must be able to save multiple custom recipes")
+        let savedSliderRecipe = RecipeLibrary(defaults: defaults).savedRecipes.first { $0.name == "Another recipe" }
+        check(savedSliderRecipe?.potassiumPartsPerMillion == 83 &&
+              savedSliderRecipe?.sodiumPartsPerMillion == 78,
+              "Slider targets must remain whole numbers after saving and loading")
         try restored.deleteRecipe(original.id)
         let afterDelete = RecipeLibrary(defaults: defaults)
         check(afterDelete.savedRecipes.count == 1 &&

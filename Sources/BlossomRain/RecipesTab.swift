@@ -22,6 +22,7 @@ struct RecipesTab: View {
     @FocusState private var focusedField: RecipeInputField?
     @State private var recipeToDelete: Recipe?
     @State private var errorMessage: String?
+    @State private var errorTitle: LocalizedStringKey = "Could Not Delete Recipe"
     
     var body: some View {
         NavigationStack {
@@ -207,9 +208,37 @@ struct RecipesTab: View {
                         .padding(.top)
                 }
                 }
+
+                // Keep actions last, including when invalid input hides the recipe preview.
+                if library.selectedID == RecipeLibrary.customSelectionID {
+                    Section {
+                        VStack(spacing: 12) {
+                            Button(action: saveCustomRecipe) {
+                                Text(library.editingRecipeID == nil ? "Save Recipe" : "Save Changes")
+                                    .frame(maxWidth: .infinity)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .controlSize(.large)
+                            .keyboardShortcut(.defaultAction)
+                            .disabled(!library.canSaveDraft)
+                            .accessibilityIdentifier("saveCustomRecipe")
+
+                            Button("Cancel", role: .cancel) {
+                                focusedField = nil
+                                library.cancelEditing()
+                            }
+                            .buttonStyle(.borderless)
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                            .accessibilityIdentifier("cancelCustomRecipe")
+                        }
+                        .padding(.vertical, 4)
+                    }
+                    .listRowBackground(Color.clear)
+                }
             }
             .navigationTitle("Recipes")
             .navigationBarTitleDisplayMode(.inline)
+            .onSubmit { saveCustomRecipe() }
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Label("Recipes", systemImage: "waterbottle")
@@ -232,11 +261,14 @@ struct RecipesTab: View {
             Button("Delete Recipe", role: .destructive) {
                 guard let recipe = recipeToDelete else { return }
                 do { try library.deleteRecipe(recipe.id) }
-                catch { errorMessage = error.localizedDescription }
+                catch {
+                    errorTitle = "Could Not Delete Recipe"
+                    errorMessage = error.localizedDescription
+                }
                 recipeToDelete = nil
             }
         }
-        .alert("Could Not Delete Recipe", isPresented: Binding(
+        .alert(errorTitle, isPresented: Binding(
             get: { errorMessage != nil },
             set: { if !$0 { errorMessage = nil } }
         )) {
@@ -254,6 +286,16 @@ struct RecipesTab: View {
         }
         .onChange(of: brState.unit) {
             updateUnits(selectedUnit: brState.unit)
+        }
+    }
+
+    private func saveCustomRecipe() {
+        guard library.selectedID == RecipeLibrary.customSelectionID, library.canSaveDraft else { return }
+        focusedField = nil
+        do { try library.saveDraft() }
+        catch {
+            errorTitle = "Could Not Save Recipe"
+            errorMessage = error.localizedDescription
         }
     }
 

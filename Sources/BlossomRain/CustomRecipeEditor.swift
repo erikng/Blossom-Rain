@@ -3,14 +3,12 @@ import SwiftUI
 struct CustomRecipeEditor: View {
     @EnvironmentObject private var library: RecipeLibrary
     @FocusState.Binding var focusedField: RecipeInputField?
-    @State private var errorMessage: String?
 
     var body: some View {
         Section {
             TextField("Recipe name", text: $library.draft.name)
                 .focused($focusedField, equals: .name)
                 .submitLabel(.done)
-                .onSubmit { focusedField = nil }
                 .accessibilityIdentifier("customRecipeName")
 
             ForEach(RecipeMineral.allCases) { mineral in
@@ -33,7 +31,7 @@ struct CustomRecipeEditor: View {
 
                     Slider(value: Binding(
                         get: { library.draft.value(for: mineral) ?? 0 },
-                        set: { library.draft[mineral] = CustomRecipeDraft.format($0) }
+                        set: { library.draft.setSliderValue($0, for: mineral) }
                     ), in: 0...150, step: 1)
                     .accessibilityLabel("\(mineral.name) target")
 
@@ -45,33 +43,10 @@ struct CustomRecipeEditor: View {
                 }
             }
 
-            HStack {
-                Button(library.editingRecipeID == nil ? "Save Recipe" : "Save Changes") {
-                    focusedField = nil
-                    do { try library.saveDraft() }
-                    catch { errorMessage = error.localizedDescription }
-                }
-                .disabled(!library.canSaveDraft)
-                .accessibilityIdentifier("saveCustomRecipe")
-                Spacer()
-                Button("Cancel") {
-                    focusedField = nil
-                    library.cancelEditing()
-                }
-            }
-            .buttonStyle(.borderless)
         } header: {
             Text(library.editingRecipeID == nil ? "Custom Recipe" : "Edit Custom Recipe")
         } footer: {
             Text("Mineral targets are in ppm as CaCO₃. Name your recipe to save it on this device.")
-        }
-        .alert("Could Not Save Recipe", isPresented: Binding(
-            get: { errorMessage != nil },
-            set: { if !$0 { errorMessage = nil } }
-        )) {
-            Button("OK", role: .cancel) { errorMessage = nil }
-        } message: {
-            Text(errorMessage ?? "")
         }
     }
 }

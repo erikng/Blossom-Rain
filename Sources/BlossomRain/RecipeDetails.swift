@@ -68,6 +68,13 @@ struct CustomRecipeDraft {
         set { values[mineral] = newValue }
     }
 
+    mutating func setSliderValue(_ value: Double, for mineral: RecipeMineral) {
+        guard value.isFinite else { return }
+        // Snap the actual target, not just its displayed text. Typed input keeps its precision.
+        let wholePartsPerMillion = min(150, max(0, value.rounded()))
+        self[mineral] = Self.format(wholePartsPerMillion)
+    }
+
     static func format(_ value: Double) -> String {
         value.formatted(.number.grouping(.never).precision(.fractionLength(0...10)))
     }
